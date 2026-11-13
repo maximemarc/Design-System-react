@@ -1,0 +1,43 @@
+import { useEffect, useState } from 'react';
+
+export type WeddingSettings = { first: string; second: string; date: string };
+export type WeddingReply = { name: string; attending: boolean; guests: number };
+const storageKey = 'forma-wedding-settings';
+const defaults: WeddingSettings = { first: 'Mathilde', second: 'Maxime', date: '2027-06-26T14:00' };
+
+function validName(value: unknown, maximum: number): value is string {
+  return typeof value === 'string' && value.trim().length > 0 && value.length <= maximum;
+}
+
+function readWeddingSettings(): { settings: WeddingSettings; reply: WeddingReply | null } {
+  try {
+    const stored: unknown = JSON.parse(localStorage.getItem(storageKey) ?? 'null');
+    if (!stored || typeof stored !== 'object') return { settings: defaults, reply: null };
+    const data = stored as Record<string, unknown>;
+    const settings = data.settings as Partial<WeddingSettings> | null;
+    const reply = data.reply as Partial<WeddingReply> | null;
+    const validSettings = settings && validName(settings.first, 40) && validName(settings.second, 40)
+      && typeof settings.date === 'string' && /^\d{4}-\d{2}-\d{2}T([01]\d|2[0-3]):[0-5]\d$/.test(settings.date)
+      && Number.isFinite(new Date(settings.date).getTime());
+    const validReply = reply && validName(reply.name, 60) && typeof reply.attending === 'boolean'
+      && typeof reply.guests === 'number' && Number.isInteger(reply.guests)
+      && (reply.attending ? reply.guests >= 1 && reply.guests <= 6 : reply.guests === 0);
+    return { settings: validSettings ? settings as WeddingSettings : defaults, reply: validReply ? reply as WeddingReply : null };
+  } catch { return { settings: defaults, reply: null }; }
+}
+
+export function useWeddingSettings() {
+  const [initial] = useState(readWeddingSettings);
+  const [settings, setSettings] = useState(initial.settings);
+  const [reply, setReply] = useState(initial.reply);
+  const [storageError, setStorageError] = useState('');
+  useEffect(() => {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify({ settings, reply }));
+      setStorageError('');
+    } catch {
+      setStorageError('La sauvegarde du mariage est bloquée dans ce navigateur. Vos modifications restent disponibles pendant cette visite seulement.');
+    }
+  }, [settings, reply]);
+  return { settings, setSettings, reply, setReply, storageError };
+}
