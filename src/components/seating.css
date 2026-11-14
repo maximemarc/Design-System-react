@@ -1,1 +1,289 @@
-.seating-planner{margin-top:24px}.seating-stats{display:flex;flex-wrap:wrap;gap:8px}.seating-instructions{font-size:11px;color:var(--muted);line-height:1.7;margin:16px 0 24px}.seating-layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:20px}.seating-roster{min-width:0;padding:16px;border:1px solid var(--border);background:var(--bg);border-radius:var(--radius)}.seating-add-guest{display:flex;gap:6px;margin-top:12px}.seating-add-guest>input{min-width:0;width:100%;padding:9px 7px;font-size:10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text)}.seating-add-guest .button{padding:7px}.seating-guest-list{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-direction:column;gap:8px;max-height:520px;overflow-y:auto}.seating-guest-list>li{display:flex;gap:2px;align-items:center}.seating-guest{display:flex;align-items:center;gap:8px;width:100%;min-width:0;text-align:left;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:7px;padding:9px 7px;cursor:grab}.seating-guest:active{cursor:grabbing}.seating-guest.selected{border-color:var(--accent);background:var(--soft-accent)}.seating-initials{display:flex;align-items:center;justify-content:center;width:27px;height:27px;flex-shrink:0;border-radius:50%;background:var(--soft-accent);color:var(--accent-ink);font-size:9px}.seating-guest>span:nth-child(2){flex:1;min-width:0}.seating-guest strong{display:block;font-size:10px;font-weight:500;overflow-wrap:anywhere}.seating-guest small{display:block;color:var(--muted);font-size:8px;margin-top:4px}.seating-guest>svg{color:var(--accent-ink)}.seating-guest-list>li>.icon-button{padding:3px}.seating-floor{min-width:0}.seating-selection{display:flex;align-items:center;flex-wrap:wrap;gap:8px;min-height:40px;font-size:10px;color:var(--muted);margin-bottom:16px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--muted-surface)}.seating-selection strong{color:var(--text);font-weight:500}.seating-selection .icon-button{margin-left:auto}.seating-tables{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}.seating-table-card{padding:12px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);transition:background var(--motion-duration),border-color var(--motion-duration)}.seating-table-card.drop-active{border-color:var(--accent);background:var(--soft-accent)}.seating-table-toolbar{display:flex;align-items:center;gap:6px}.seating-table-toolbar>span{flex:1;color:var(--muted);font-size:10px}.seating-round-table{position:relative;width:228px;height:228px;max-width:100%;margin:12px auto}.seating-table-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;width:128px;height:128px;border:1px solid var(--border);background:var(--surface);box-shadow:0 5px 20px #00000005;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;padding:14px;text-align:center}.seating-table-center>svg{color:var(--accent-ink)}.seating-table-center strong{font-size:12px;font-weight:500;overflow-wrap:anywhere;line-height:1.4}.seating-table-center button{border:0;background:transparent;color:var(--accent-ink);font-size:9px;padding:3px}.seating-table-center button:disabled{opacity:.5}.seating-seat{position:absolute;transform:translate(-50%,-50%);width:33px;height:33px;border:1px dashed var(--border);border-radius:50%;background:var(--surface);color:var(--muted);font-size:10px;padding:0}.seating-seat:hover{border-color:var(--accent);background:var(--soft-accent);transform:translate(-50%,-50%) scale(1.08)}.seating-seat.occupied{background:var(--soft-accent);border:1px solid var(--accent);color:var(--accent-ink);cursor:grab}.seating-seat.selected{background:var(--accent);color:var(--on-accent,white);outline:2px solid var(--accent);outline-offset:3px}.seating-empty{padding:24px 8px;color:var(--muted);font-size:11px;text-align:center}.seating-empty .button{margin-top:16px}@media(max-width:1150px){.seating-layout{grid-template-columns:1fr}.seating-guest-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-height:260px}.seating-roster .input-wrap{max-width:340px}.seating-add-guest{max-width:340px}}@media(max-width:600px){.seating-planner>.advanced-heading{flex-wrap:wrap}.seating-layout{gap:16px}.seating-tables{grid-template-columns:1fr}.seating-guest-list{grid-template-columns:1fr}.seating-round-table{width:250px;height:250px}.seating-guest strong{font-size:11px}.seating-roster{padding:12px}}
+.seating-planner {
+  margin-top: 24px;
+}
+.seating-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.seating-instructions {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 16px 0 24px;
+}
+.seating-layout {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 20px;
+}
+.seating-roster {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: var(--radius);
+}
+.seating-add-guest {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+}
+.seating-add-guest > input {
+  min-width: 0;
+  width: 100%;
+  padding: 9px 7px;
+  font-size: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+}
+.seating-add-guest .button {
+  padding: 7px;
+}
+.seating-guest-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 520px;
+  overflow-y: auto;
+}
+.seating-guest-list > li {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+.seating-guest {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  text-align: left;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 9px 7px;
+  cursor: grab;
+}
+.seating-guest:active {
+  cursor: grabbing;
+}
+.seating-guest.selected {
+  border-color: var(--accent);
+  background: var(--soft-accent);
+}
+.seating-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 27px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--soft-accent);
+  color: var(--accent-ink);
+  font-size: 9px;
+}
+.seating-guest > span:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+}
+.seating-guest strong {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.seating-guest small {
+  display: block;
+  color: var(--muted);
+  font-size: 8px;
+  margin-top: 4px;
+}
+.seating-guest > svg {
+  color: var(--accent-ink);
+}
+.seating-guest-list > li > .icon-button {
+  padding: 3px;
+}
+.seating-floor {
+  min-width: 0;
+}
+.seating-selection {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 40px;
+  font-size: 10px;
+  color: var(--muted);
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--muted-surface);
+}
+.seating-selection strong {
+  color: var(--text);
+  font-weight: 500;
+}
+.seating-selection .icon-button {
+  margin-left: auto;
+}
+.seating-tables {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+.seating-table-card {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  transition:
+    background var(--motion-duration),
+    border-color var(--motion-duration);
+}
+.seating-table-card.drop-active {
+  border-color: var(--accent);
+  background: var(--soft-accent);
+}
+.seating-table-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.seating-table-toolbar > span {
+  flex: 1;
+  color: var(--muted);
+  font-size: 10px;
+}
+.seating-round-table {
+  position: relative;
+  width: 228px;
+  height: 228px;
+  max-width: 100%;
+  margin: 12px auto;
+}
+.seating-table-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: 128px;
+  height: 128px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 5px 20px #00000005;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  text-align: center;
+}
+.seating-table-center > svg {
+  color: var(--accent-ink);
+}
+.seating-table-center strong {
+  font-size: 12px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}
+.seating-table-center button {
+  border: 0;
+  background: transparent;
+  color: var(--accent-ink);
+  font-size: 9px;
+  padding: 3px;
+}
+.seating-table-center button:disabled {
+  opacity: 0.5;
+}
+.seating-seat {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 33px;
+  height: 33px;
+  border: 1px dashed var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 10px;
+  padding: 0;
+}
+.seating-seat:hover {
+  border-color: var(--accent);
+  background: var(--soft-accent);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+.seating-seat.occupied {
+  background: var(--soft-accent);
+  border: 1px solid var(--accent);
+  color: var(--accent-ink);
+  cursor: grab;
+}
+.seating-seat.selected {
+  background: var(--accent);
+  color: var(--on-accent, white);
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.seating-empty {
+  padding: 24px 8px;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+}
+.seating-empty .button {
+  margin-top: 16px;
+}
+@media (max-width: 1150px) {
+  .seating-layout {
+    grid-template-columns: 1fr;
+  }
+  .seating-guest-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-height: 260px;
+  }
+  .seating-roster .input-wrap {
+    max-width: 340px;
+  }
+  .seating-add-guest {
+    max-width: 340px;
+  }
+}
+@media (max-width: 600px) {
+  .seating-planner > .advanced-heading {
+    flex-wrap: wrap;
+  }
+  .seating-layout {
+    gap: 16px;
+  }
+  .seating-tables {
+    grid-template-columns: 1fr;
+  }
+  .seating-guest-list {
+    grid-template-columns: 1fr;
+  }
+  .seating-round-table {
+    width: 250px;
+    height: 250px;
+  }
+  .seating-guest strong {
+    font-size: 11px;
+  }
+  .seating-roster {
+    padding: 12px;
+  }
+}

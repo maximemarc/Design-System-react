@@ -14,13 +14,21 @@ export function useSeasonPreferences() {
       return {
         season: seasons.find(item => item.id === value.season)?.id ?? defaults.season,
         motifs: typeof value.motifs === 'boolean' ? value.motifs : defaults.motifs,
-        backgroundIcon: value.backgroundIcon === 'auto' ? 'auto' : backgroundIcons.find(item => item.id === value.backgroundIcon)?.id ?? 'auto',
+        backgroundIcon:
+          value.backgroundIcon === 'auto'
+            ? 'auto'
+            : (backgroundIcons.find(item => item.id === value.backgroundIcon)?.id ?? 'auto'),
       };
-    } catch { return defaults; }
+    } catch {
+      return defaults;
+    }
   });
   useEffect(() => {
-    try { localStorage.setItem(storageKey, JSON.stringify(preferences)); }
-    catch { console.warn('Les préférences saisonnières ne peuvent pas être mémorisées dans ce navigateur.'); }
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(preferences));
+    } catch {
+      console.warn('Les préférences saisonnières ne peuvent pas être mémorisées dans ce navigateur.');
+    }
   }, [preferences]);
   return { preferences, setPreferences };
 }
