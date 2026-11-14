@@ -1,1 +1,180 @@
-.interactive-gallery{display:grid;gap:24px;margin-top:24px}.custom-input-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.custom-input-form .input-wrap input{font-size:12px}.custom-input-form .input-wrap{padding:12px}.quantity-control{display:flex;align-items:center;gap:12px}.quantity-control input{width:64px;padding:9px;border:1px solid var(--border);border-radius:calc(var(--radius)*.5);text-align:center;background:var(--surface);color:var(--text)}.priority-field{border:0;margin:0;padding:0;min-width:0}.priority-field legend{padding:0}.custom-submit{display:flex;align-items:flex-end;justify-content:flex-end}.date-picker>.button{width:100%;justify-content:flex-start;padding:12px;font-size:12px;white-space:normal}.calendar-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:24px 0 16px}.calendar-heading strong{text-transform:capitalize;font-size:14px;font-weight:500}.calendar-weekdays,.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.calendar-weekdays{margin-bottom:10px;text-align:center;font-size:11px;color:var(--muted)}.calendar-grid button{background:var(--bg);border:1px solid var(--border);border-radius:calc(var(--radius)*.5);padding:10px 0;font-size:12px}.calendar-grid button:hover{background:var(--soft-accent);border-color:var(--accent)}.calendar-grid .selected{background:var(--accent);color:white;border-color:var(--accent)}.chart-controls{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}.chart-controls .theme-options{min-width:180px}.chart-summary{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px}.chart-summary strong{font-size:28px;font-weight:600}.chart-summary strong>span{font-size:11px;color:var(--muted);font-weight:400}.custom-chart-svg{display:block;width:100%;height:auto;margin-top:16px}.chart-point-controls{display:flex;gap:8px}.chart-point-controls button{flex:1;border:1px solid var(--border);background:var(--bg);border-radius:calc(var(--radius)*.5);padding:10px 2px;font-size:10px}.chart-point-controls button span{display:block;margin-top:4px;color:var(--muted)}.chart-point-controls .selected{background:var(--soft-accent);border-color:var(--accent);color:var(--accent-ink)}.chart-reset{display:block;margin:16px auto 0;font-size:11px;color:var(--accent-ink);border:0;background:none}.custom-chart svg text{font-family:inherit}@media(max-width:600px){.custom-input-form{grid-template-columns:1fr;gap:20px}.custom-submit{justify-content:flex-start}.chart-summary{flex-wrap:wrap}.chart-summary strong{font-size:24px}.chart-point-controls{gap:4px}.chart-controls .theme-options{min-width:0;flex:1}.chart-controls{gap:8px}}
+.interactive-gallery {
+  display: grid;
+  gap: 24px;
+  margin-top: 24px;
+}
+.custom-input-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.custom-input-form .input-wrap input {
+  font-size: 12px;
+}
+.custom-input-form .input-wrap {
+  padding: 12px;
+}
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.quantity-control input {
+  width: 64px;
+  padding: 9px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 0.5);
+  text-align: center;
+  background: var(--surface);
+  color: var(--text);
+}
+.priority-field {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.priority-field legend {
+  padding: 0;
+}
+.custom-submit {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.date-picker > .button {
+  width: 100%;
+  justify-content: flex-start;
+  padding: 12px;
+  font-size: 12px;
+  white-space: normal;
+}
+.calendar-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0 16px;
+}
+.calendar-heading strong {
+  text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 500;
+}
+.calendar-weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+.calendar-weekdays {
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+}
+.calendar-grid button {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 0.5);
+  padding: 10px 0;
+  font-size: 12px;
+}
+.calendar-grid button:hover {
+  background: var(--soft-accent);
+  border-color: var(--accent);
+}
+.calendar-grid .selected {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.chart-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.chart-controls .theme-options {
+  min-width: 180px;
+}
+.chart-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+}
+.chart-summary strong {
+  font-size: 28px;
+  font-weight: 600;
+}
+.chart-summary strong > span {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 400;
+}
+.custom-chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 16px;
+}
+.chart-point-controls {
+  display: flex;
+  gap: 8px;
+}
+.chart-point-controls button {
+  flex: 1;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: calc(var(--radius) * 0.5);
+  padding: 10px 2px;
+  font-size: 10px;
+}
+.chart-point-controls button span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+}
+.chart-point-controls .selected {
+  background: var(--soft-accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+.chart-reset {
+  display: block;
+  margin: 16px auto 0;
+  font-size: 11px;
+  color: var(--accent-ink);
+  border: 0;
+  background: none;
+}
+.custom-chart svg text {
+  font-family: inherit;
+}
+@media (max-width: 600px) {
+  .custom-input-form {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .custom-submit {
+    justify-content: flex-start;
+  }
+  .chart-summary {
+    flex-wrap: wrap;
+  }
+  .chart-summary strong {
+    font-size: 24px;
+  }
+  .chart-point-controls {
+    gap: 4px;
+  }
+  .chart-controls .theme-options {
+    min-width: 0;
+    flex: 1;
+  }
+  .chart-controls {
+    gap: 8px;
+  }
+}
