@@ -1,1 +1,79 @@
-.app[data-season=halloween]{--bg:#fcf6ef;--muted-surface:#f7ebdd;--border:#e9dac8}.app[data-season=christmas]{--bg:#fbf7f4;--muted-surface:#f3eae5;--border:#e9dad3}.app[data-season=celebration]{--bg:#fcfaf2;--muted-surface:#f6f0db;--border:#e9e0c5}.app.dark[data-season=halloween]{--bg:#251b14;--muted-surface:#392a1f;--border:#4d3a2a}.app.dark[data-season=christmas]{--bg:#1b241e;--muted-surface:#29352d;--border:#3c493f}.app.dark[data-season=celebration]{--bg:#242116;--muted-surface:#363122;--border:#48422e}.background-icon-label{display:block;font-size:10px;font-weight:500;margin:24px 0 8px}.background-icon-select{width:100%;padding:9px;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:calc(var(--radius)*.6);font-size:10px}.background-icon-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:12px}.background-icon-grid button{display:flex;justify-content:center;align-items:center;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--muted);padding:7px 2px}.background-icon-grid button.selected{background:var(--soft-accent);color:var(--accent-ink);border-color:var(--accent)}@media(max-width:1000px){.season-options{grid-template-columns:repeat(4,minmax(0,1fr))}.background-icon-grid{max-width:400px}}@media(max-width:600px){.season-options{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.app[data-season='halloween'] {
+  --bg: #fcf6ef;
+  --muted-surface: #f7ebdd;
+  --border: #e9dac8;
+}
+.app[data-season='christmas'] {
+  --bg: #fbf7f4;
+  --muted-surface: #f3eae5;
+  --border: #e9dad3;
+}
+.app[data-season='celebration'] {
+  --bg: #fcfaf2;
+  --muted-surface: #f6f0db;
+  --border: #e9e0c5;
+}
+.app.dark[data-season='halloween'] {
+  --bg: #251b14;
+  --muted-surface: #392a1f;
+  --border: #4d3a2a;
+}
+.app.dark[data-season='christmas'] {
+  --bg: #1b241e;
+  --muted-surface: #29352d;
+  --border: #3c493f;
+}
+.app.dark[data-season='celebration'] {
+  --bg: #242116;
+  --muted-surface: #363122;
+  --border: #48422e;
+}
+.background-icon-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  margin: 24px 0 8px;
+}
+.background-icon-select {
+  width: 100%;
+  padding: 9px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: calc(var(--radius) * 0.6);
+  font-size: 10px;
+}
+.background-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  margin-top: 12px;
+}
+.background-icon-grid button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--muted);
+  padding: 7px 2px;
+}
+.background-icon-grid button.selected {
+  background: var(--soft-accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+@media (max-width: 1000px) {
+  .season-options {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .background-icon-grid {
+    max-width: 400px;
+  }
+}
+@media (max-width: 600px) {
+  .season-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
