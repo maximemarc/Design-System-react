@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useRef, useState, type Dispatch, type SetStateAction } from 'react';
 
 export type WeddingSettings = { first: string; second: string; date: string };
 export type WeddingReply = { name: string; attending: boolean; guests: number };
@@ -46,20 +46,46 @@ function readWeddingSettings(): { settings: WeddingSettings; reply: WeddingReply
   }
 }
 
+const blockedMessage =
+  'La sauvegarde du mariage est bloquée dans ce navigateur. Vos modifications restent disponibles pendant cette visite seulement.';
+
+function persist(settings: WeddingSettings, reply: WeddingReply | null) {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify({ settings, reply }));
+    return '';
+  } catch {
+    return blockedMessage;
+  }
+}
+
+// Comme useSavedThemes : on enregistre au moment du changement, pas dans un effet.
 export function useWeddingSettings() {
-  const [initial] = useState(readWeddingSettings);
-  const [settings, setSettings] = useState(initial.settings);
-  const [reply, setReply] = useState(initial.reply);
-  const [storageError, setStorageError] = useState('');
-  useEffect(() => {
-    try {
-      localStorage.setItem(storageKey, JSON.stringify({ settings, reply }));
-      setStorageError('');
-    } catch {
-      setStorageError(
-        'La sauvegarde du mariage est bloquée dans ce navigateur. Vos modifications restent disponibles pendant cette visite seulement.',
-      );
-    }
-  }, [settings, reply]);
-  return { settings, setSettings, reply, setReply, storageError };
+  const [state, setState] = useState(() => ({ ...readWeddingSettings(), storageError: '' }));
+  const latest = useRef(state);
+  const commit = useCallback((settings: WeddingSettings, reply: WeddingReply | null) => {
+    const next = { settings, reply, storageError: persist(settings, reply) };
+    latest.current = next;
+    setState(next);
+  }, []);
+  const setSettings: Dispatch<SetStateAction<WeddingSettings>> = useCallback(
+    action => {
+      const current = latest.current;
+      commit(typeof action === 'function' ? action(current.settings) : action, current.reply);
+    },
+    [commit],
+  );
+  const setReply: Dispatch<SetStateAction<WeddingReply | null>> = useCallback(
+    action => {
+      const current = latest.current;
+      commit(current.settings, typeof action === 'function' ? action(current.reply) : action);
+    },
+    [commit],
+  );
+  return {
+    settings: state.settings,
+    setSettings,
+    reply: state.reply,
+    setReply,
+    storageError: state.storageError,
+  };
 }

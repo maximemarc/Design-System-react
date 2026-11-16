@@ -20,14 +20,18 @@ export default function EventCountdown({
   const [draft, setDraft] = useState(settings);
   const [editing, setEditing] = useState(false);
   const [timeInput, setTimeInput] = useState(settings.date.slice(11, 16));
+  const [syncedDate, setSyncedDate] = useState(settings.date);
   const [now, setNow] = useState(() => Date.now());
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(timer);
   }, []);
-  useEffect(() => {
+  // Resynchronise le champ heure quand la date change ailleurs, pendant le rendu
+  // plutôt que dans un effet (évite un rendu en cascade).
+  if (syncedDate !== settings.date) {
+    setSyncedDate(settings.date);
     setTimeInput(settings.date.slice(11, 16));
-  }, [settings.date]);
+  }
   const target = new Date(settings.date);
   const remaining = Math.max(0, Math.floor((target.getTime() - now) / 1000));
   const values = [

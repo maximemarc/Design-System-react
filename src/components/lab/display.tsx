@@ -64,15 +64,12 @@ export function NumberTicker({
   useEffect(() => {
     const from = shownRef.current;
     if (from === value) return;
-    if (prefersReducedMotion()) {
-      shownRef.current = value;
-      setShown(value);
-      return;
-    }
+    // Mouvement réduit : la valeur finale est posée dès la première image, sans animation.
+    const reduced = prefersReducedMotion();
     const start = performance.now();
     let frame = 0;
     const tick = (now: number) => {
-      const progress = Math.min(1, (now - start) / duration);
+      const progress = reduced ? 1 : Math.min(1, (now - start) / duration);
       const next = from + (value - from) * (1 - Math.pow(1 - progress, 3));
       shownRef.current = next;
       setShown(next);

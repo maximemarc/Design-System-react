@@ -130,11 +130,18 @@ export function CommandPalette({
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState('');
   const [highlight, setHighlight] = useState(0);
+  const [wasOpen, setWasOpen] = useState(open);
   const id = useId();
-  useEffect(() => {
+  // Remet la recherche à zéro à chaque ouverture, pendant le rendu plutôt que dans l'effet.
+  if (open !== wasOpen) {
+    setWasOpen(open);
     if (open) {
       setQuery('');
       setHighlight(0);
+    }
+  }
+  useEffect(() => {
+    if (open) {
       ref.current?.showModal();
       inputRef.current?.focus();
     } else ref.current?.close();
