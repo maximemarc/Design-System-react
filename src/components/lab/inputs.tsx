@@ -1,5 +1,6 @@
 import { useId, useRef, useState, type ClipboardEvent, type CSSProperties, type KeyboardEvent } from 'react';
 import { Check, Copy, Star, X } from 'lucide-react';
+import { passwordCriteria, passwordScore } from '@/components/lab/password';
 
 export function Rating({
   value,
@@ -386,20 +387,8 @@ export function ColorPicker({
   );
 }
 
-const criteria = [
-  { label: '12 caractères minimum', test: (value: string) => value.length >= 12 },
-  {
-    label: 'Une majuscule et une minuscule',
-    test: (value: string) => /[a-z]/.test(value) && /[A-Z]/.test(value),
-  },
-  { label: 'Un chiffre', test: (value: string) => /\d/.test(value) },
-  { label: 'Un symbole', test: (value: string) => /[^A-Za-z0-9]/.test(value) },
-];
+const criteria = passwordCriteria;
 const levels = ['Très faible', 'Faible', 'Moyen', 'Bon', 'Excellent'];
-
-export function passwordScore(value: string) {
-  return value ? criteria.filter(item => item.test(value)).length : 0;
-}
 
 export function PasswordStrength({ value }: { value: string }) {
   const score = passwordScore(value);

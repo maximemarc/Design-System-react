@@ -27,12 +27,12 @@ import {
   ColorPicker,
   CopyField,
   OtpInput,
-  passwordScore,
   PasswordStrength,
   RangeSlider,
   Rating,
   TagInput,
 } from '@/components/lab/inputs';
+import { passwordScore } from '@/components/lab/password';
 import { Carousel, NumberTicker, ProgressRing, SpotlightCard } from '@/components/lab/display';
 import { CommandPalette, KanbanBoard, type KanbanCard } from '@/components/lab/workflow';
 import '@/components/lab/lab.css';
