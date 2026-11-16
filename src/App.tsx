@@ -11,6 +11,7 @@ import {
   Download,
   ExternalLink,
   LayoutDashboard,
+  LayoutGrid,
   Menu,
   Moon,
   Palette,
@@ -23,6 +24,7 @@ import {
   Zap,
 } from 'lucide-react';
 import Showcase from '@/components/Showcase';
+import DashboardShowcase from '@/components/DashboardShowcase';
 import ThemeLibrary from '@/components/ThemeLibrary';
 import LabExamples from '@/components/lab/LabExamples';
 import { useSavedThemes } from '@/components/useSavedThemes';
@@ -42,6 +44,7 @@ import { Badge, Button, Modal, SectionHeading, Switch } from '@/components/ui';
 const pages = [
   { name: 'Vue d’ensemble', icon: LayoutDashboard },
   { name: 'Composants', icon: Component },
+  { name: 'Tableau de bord', icon: LayoutGrid },
   { name: 'Fondations', icon: Palette },
   { name: 'Thèmes', icon: Sparkles },
   { name: 'Animations', icon: Zap },
@@ -445,6 +448,7 @@ function App() {
               {(page === 'Vue d’ensemble' || page === 'Composants') && (
                 <Showcase notify={notify} toastPosition={position} onToastPositionChange={setPosition} />
               )}
+              {page === 'Tableau de bord' && <DashboardShowcase notify={notify} />}
               {page === 'Thèmes' && (
                 <ThemeLibrary
                   current={theme}

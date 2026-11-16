@@ -1,0 +1,580 @@
+/*
+ * Composants de tableau de bord pour Forma.
+ * Ils ne lisent que les jetons du thème (--surface, --accent, --radius,
+ * --motion-duration, et les jetons d'état ajoutés dans index.css).
+ */
+
+/* ---------- BentoGrid et Tile ---------- */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: minmax(160px, auto);
+  grid-auto-flow: dense;
+  gap: 16px;
+}
+.bento-compact {
+  grid-auto-rows: minmax(136px, auto);
+}
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  min-width: 0;
+  padding: var(--card-padding, 24px);
+  border-radius: calc(var(--radius) * 1.5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition:
+    transform var(--motion-duration),
+    box-shadow var(--motion-duration),
+    border-color var(--motion-duration);
+}
+.tile-span-3 {
+  grid-column: span 3;
+}
+.tile-span-4 {
+  grid-column: span 4;
+}
+.tile-span-5 {
+  grid-column: span 5;
+}
+.tile-span-6 {
+  grid-column: span 6;
+}
+.tile-span-8 {
+  grid-column: span 8;
+}
+.tile-span-12 {
+  grid-column: span 12;
+}
+.tile-rows-2 {
+  grid-row: span 2;
+}
+.tile-feature {
+  background: var(--soft-accent);
+  border-color: var(--accent-line);
+}
+.tile-success {
+  background: var(--success-bg);
+  border-color: transparent;
+}
+.tile-warning {
+  background: var(--warning-bg);
+  border-color: transparent;
+}
+.tile-locked {
+  background: var(--bg);
+  border-style: dashed;
+  border-color: var(--border-strong);
+}
+.tile-ghost {
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--border-strong);
+}
+.tile-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elevated-shadow);
+}
+.tile:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.tile:focus-within .tile-link:focus-visible {
+  outline: none;
+}
+.tile-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+.tile .tile-link::after {
+  border-radius: calc(var(--radius) * 1.5);
+}
+.tile-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.tile-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.tile-label-accent {
+  color: var(--accent-ink);
+}
+.tile-label-success {
+  color: var(--success);
+}
+.tile-label-warning {
+  color: var(--warning);
+}
+@media (max-width: 1000px) {
+  .tile-span-3,
+  .tile-span-4,
+  .tile-span-5 {
+    grid-column: span 6;
+  }
+  .tile-span-6,
+  .tile-span-8 {
+    grid-column: span 12;
+  }
+}
+@media (max-width: 640px) {
+  .bento > * {
+    grid-column: span 12 !important;
+  }
+  .tile-rows-2 {
+    grid-row: auto;
+  }
+}
+
+/* ---------- AppIcon ---------- */
+.app-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--accent-ink);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  line-height: 1;
+  transition:
+    transform var(--motion-duration),
+    box-shadow var(--motion-duration);
+}
+.app-icon img {
+  display: block;
+  object-fit: contain;
+}
+.app-icon.is-round {
+  border-radius: 999px;
+}
+.app-icon.is-locked {
+  background: var(--bg);
+  border-style: dashed;
+  color: var(--muted);
+}
+.app-icon.is-locked img,
+.app-icon.is-locked svg {
+  filter: grayscale(1);
+  opacity: 0.45;
+}
+
+/* ---------- Launcher ---------- */
+.launcher {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 4px;
+}
+.launcher-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 6px 10px;
+  border-radius: var(--radius);
+  text-align: center;
+  min-width: 0;
+}
+a.launcher-item:hover {
+  background: var(--muted-surface);
+}
+a.launcher-item:hover .app-icon {
+  transform: translateY(-2px);
+  box-shadow: var(--elevated-shadow);
+}
+.launcher-name {
+  max-width: 100%;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.launcher-item.is-locked .launcher-name {
+  color: var(--muted);
+}
+.launcher-status {
+  font-size: 12px;
+  font-weight: 500;
+}
+.tone-warning {
+  color: var(--warning);
+}
+.tone-danger {
+  color: var(--danger);
+}
+.tone-success {
+  color: var(--success);
+}
+
+/* ---------- StatusMeter ---------- */
+.status-meter-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.status-meter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.status-cell {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.status-cell.is-up {
+  background: var(--success-dot);
+}
+.status-cell.is-slow {
+  background: var(--warning-dot);
+}
+.status-cell.is-down {
+  border: 2px solid var(--danger-dot);
+}
+.status-cell.is-unknown {
+  background: var(--border);
+}
+.status-cell.is-vpn {
+  border: 2px dashed var(--border-strong);
+}
+.status-meter.is-pending .status-cell {
+  animation: dashboard-pulse 1.4s ease-in-out infinite;
+}
+.status-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.status-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.status-meter-time {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ---------- ServiceList, ServiceRow, StarToggle ---------- */
+.service-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+.service-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px minmax(170px, 1.2fr) minmax(100px, 0.8fr) minmax(0, 2fr) auto;
+  align-items: center;
+  column-gap: 14px;
+  min-height: 56px;
+  padding: 6px 16px 6px 6px;
+}
+.service-row + .service-row {
+  border-top: 1px solid var(--border);
+}
+.service-row.is-interactive:hover {
+  background: var(--muted-surface);
+}
+.service-row:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+.service-row .tile-link:focus-visible {
+  outline: none;
+}
+.service-row-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.service-row-name {
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.service-row.is-locked .service-row-name {
+  color: var(--muted);
+}
+.service-row-host {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12.5px;
+  color: var(--accent-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.service-row-description {
+  font-size: 14px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+@media (max-width: 860px) {
+  .service-row {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+  }
+  .service-row-host,
+  .service-row-description {
+    display: none;
+  }
+}
+.star-toggle {
+  position: relative;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: calc(var(--radius) * 0.6);
+  background: transparent;
+  color: var(--muted);
+}
+.star-toggle:hover {
+  background: var(--muted-surface);
+}
+.star-toggle[aria-pressed='true'] {
+  color: var(--warning-dot);
+}
+
+/* ---------- FavoriteChip et UserChip ---------- */
+.favorite-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px 0 6px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+.favorite-chip:hover {
+  border-color: var(--accent-line);
+  background: var(--soft-accent);
+}
+.favorite-chip.is-editing {
+  border-style: dashed;
+  padding: 0 10px 0 14px;
+}
+.user-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 14px 0 5px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.user-chip-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--soft-accent);
+  color: var(--accent-ink);
+  border: 1px solid var(--accent-line);
+}
+.user-chip-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.user-chip-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+.user-chip-role {
+  font-size: 12px;
+  color: var(--muted);
+}
+.user-chip-action {
+  margin-left: 6px;
+}
+
+/* ---------- StatTile ---------- */
+.stat-tile-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.stat-tile-value {
+  font-family: 'Manrope', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+.stat-tile-value.is-locked {
+  color: var(--muted);
+}
+.stat-tile-value.is-down {
+  color: var(--danger);
+}
+.stat-tile-caption {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ---------- Skeleton ---------- */
+.skeleton {
+  display: block;
+  border-radius: 6px;
+  background: var(--border);
+  animation: dashboard-pulse 1.4s ease-in-out infinite;
+}
+@keyframes dashboard-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---------- Callout ---------- */
+.callout {
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: calc(var(--radius) * 1.2);
+  border: 1px solid transparent;
+}
+.callout-accent {
+  background: var(--soft-accent);
+  border-color: var(--accent-line);
+  --callout-ink: var(--accent-ink);
+}
+.callout-success {
+  background: var(--success-bg);
+  --callout-ink: var(--success);
+}
+.callout-warning {
+  background: var(--warning-bg);
+  --callout-ink: var(--warning);
+}
+.callout-danger {
+  background: var(--danger-bg);
+  --callout-ink: var(--danger);
+}
+.callout-icon {
+  margin-top: 2px;
+  color: var(--callout-ink);
+}
+.callout-body {
+  flex: 1;
+  min-width: 0;
+}
+.callout-title {
+  font-size: 14px;
+  font-weight: 500;
+}
+.callout-warning .callout-title,
+.callout-danger .callout-title,
+.callout-success .callout-title {
+  color: var(--callout-ink);
+}
+.callout-text {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.callout-warning .callout-text,
+.callout-danger .callout-text,
+.callout-success .callout-text {
+  color: var(--callout-ink);
+}
+.callout-dismiss {
+  width: 40px;
+  height: 40px;
+  margin: -8px -8px 0 0;
+}
+
+/* ---------- TabBar ---------- */
+.tab-bar {
+  display: grid;
+  gap: 4px;
+  padding: 8px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+.tab-bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 52px;
+  border: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+.tab-bar-item[aria-current='page'] {
+  background: var(--soft-accent);
+  color: var(--accent-ink);
+}
+
+/* ---------- Mouvement réduit ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton,
+  .status-meter.is-pending .status-cell {
+    animation: none;
+  }
+  .tile-interactive:hover,
+  a.launcher-item:hover .app-icon {
+    transform: none;
+  }
+}
+.no-motion .skeleton,
+.no-motion .status-meter.is-pending .status-cell {
+  animation: none;
+}

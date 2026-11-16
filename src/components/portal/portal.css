@@ -1,0 +1,51 @@
+/* Compositions métier du portail : NetworkTile et HealthTile. */
+.network-tile-body,
+.health-tile-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.network-tile-title,
+.health-tile-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+.network-tile-text,
+.health-tile-text {
+  font-size: 14px;
+  color: var(--muted);
+}
+.network-tile-text.tone-success {
+  color: var(--success);
+}
+.network-tile-text.tone-warning {
+  color: var(--warning);
+}
+.network-tile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.health-tile-count {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -1.4px;
+  line-height: 1.2;
+}
+.health-tile-count .health-tile-text {
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0;
+}
+.health-tile-issue {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+}
