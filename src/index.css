@@ -74,7 +74,19 @@ svg {
   --muted: #6e756d;
   --accent-ink: var(--accent);
   --border: #e8ebe5;
+  --border-strong: #d6dbd3;
   --soft-accent: color-mix(in srgb, var(--accent) 9%, var(--surface));
+  --accent-line: color-mix(in srgb, var(--accent) 28%, var(--border));
+  --success-bg: #edf6ef;
+  --success: #407951;
+  --success-dot: #4f9a66;
+  --warning-bg: #fbf3e4;
+  --warning: #85570f;
+  --warning-dot: #d49a2a;
+  --danger-bg: #fbeceb;
+  --danger: #a3392e;
+  --danger-dot: #d0574a;
+  --elevated-shadow: 0 12px 25px #25463212;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -87,7 +99,19 @@ svg {
   --muted: #a3aea6;
   --accent-ink: color-mix(in srgb, var(--accent) 55%, white);
   --border: #333d36;
+  --border-strong: #46524a;
   --soft-accent: color-mix(in srgb, var(--accent) 20%, var(--surface));
+  --accent-line: color-mix(in srgb, var(--accent) 45%, var(--border));
+  --success-bg: #263d2f;
+  --success: #9bc7a7;
+  --success-dot: #6fb184;
+  --warning-bg: #3a3020;
+  --warning: #e3c68a;
+  --warning-dot: #d9a441;
+  --danger-bg: #3d2624;
+  --danger: #eba79f;
+  --danger-dot: #e0695c;
+  --elevated-shadow: 0 12px 25px #00000040;
 }
 .sidebar {
   width: 232px;
@@ -653,6 +677,21 @@ kbd {
 .badge-accent {
   background: var(--soft-accent);
   color: var(--accent-ink);
+}
+.badge-warning {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+.badge-danger {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
 }
 .gallery-heading > .badge {
   background: var(--surface);

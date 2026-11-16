@@ -1,0 +1,83 @@
+/* Mise en page de la démonstration « Tableau de bord » dans la galerie. */
+.dashboard-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.dashboard-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px 24px;
+  padding: 16px 20px;
+  border-radius: calc(var(--radius) * 1.5);
+  background: var(--muted-surface);
+  border: 1px solid var(--border);
+}
+.dashboard-controls .segmented button {
+  padding: 8px 12px;
+  font-size: 12px;
+}
+.dashboard-hero-title {
+  font-size: clamp(30px, 3vw, 44px);
+  letter-spacing: -1.6px;
+}
+.dashboard-hero-title span {
+  color: var(--accent-ink);
+}
+.dashboard-search input {
+  font-size: 14px;
+}
+.dashboard-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.dashboard-pins {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.dashboard-pins-label {
+  font-size: 13px;
+  color: var(--muted);
+}
+.dashboard-feature {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.dashboard-feature h3 {
+  font-size: 30px;
+  letter-spacing: -1.1px;
+}
+.dashboard-feature p {
+  color: var(--muted);
+}
+.dashboard-tile-title {
+  display: block;
+  font-family: 'Manrope', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+.dashboard-tile-title.is-muted {
+  color: var(--muted);
+}
+.dashboard-tile-text {
+  font-size: 13px;
+  color: var(--muted);
+}
+.dashboard-launcher-tile,
+.dashboard-phone-tile {
+  justify-content: flex-start;
+}
+.dashboard-phone-tile .tab-bar {
+  margin-top: auto;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 1.3);
+}

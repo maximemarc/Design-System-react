@@ -40,14 +40,23 @@ export function Switch({
   );
 }
 
+export type BadgeTone = 'neutral' | 'success' | 'accent' | 'warning' | 'danger';
+
 export function Badge({
   children,
   tone = 'neutral',
+  dot = false,
 }: {
   children: ReactNode;
-  tone?: 'neutral' | 'success' | 'accent';
+  tone?: BadgeTone;
+  dot?: boolean;
 }) {
-  return <span className={`badge badge-${tone}`}>{children}</span>;
+  return (
+    <span className={`badge badge-${tone}`}>
+      {dot && <span className="badge-dot" aria-hidden="true" />}
+      {children}
+    </span>
+  );
 }
 
 export function Modal({
