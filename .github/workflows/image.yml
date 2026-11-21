@@ -1,0 +1,91 @@
+---
+# =============================================================================
+#  Image de la vitrine -> ghcr.io/maximemarc/design-system-react (paquet privé)
+#
+#  Publiée à chaque étiquette `vX.Y.Z` poussée sur le dépôt :
+#    ghcr.io/maximemarc/design-system-react:X.Y.Z         (le tag utilisé par les manifests)
+#    ghcr.io/maximemarc/design-system-react:sha-<commit>  (traçabilité / retour arrière)
+#
+#  Un tag publié n'est JAMAIS réécrit. Les nœuds gardent l'image qu'ils ont déjà
+#  tirée (imagePullPolicy IfNotPresent) : un tag réécrit n'arriverait pas dans le
+#  cluster, et son contenu dépendrait du nœud qui le tire. Une étiquette dont
+#  l'image existe déjà fait donc échouer le job : publier une nouvelle image,
+#  c'est pousser une nouvelle étiquette.
+#
+#  Même convention que le workflow Images du dépôt infra-cluster, où vivent les
+#  manifests qui tirent cette image (apps/design-system/). Le cluster la tire avec le
+#  secret « ghcr » (jeton read:packages).
+# =============================================================================
+
+name: Image
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: image-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: design-system-react
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
+    env:
+      IMAGE: ghcr.io/maximemarc/design-system-react
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Version
+        id: v
+        run: |
+          set -euo pipefail
+          v="${GITHUB_REF_NAME#v}"
+          [[ "$v" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]] \
+            || { echo "::error::étiquette inattendue : '$GITHUB_REF_NAME' (vX.Y.Z attendu)"; exit 1; }
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+          echo "short=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+
+      - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Tag déjà publié ?
+        env:
+          VERSION: ${{ steps.v.outputs.version }}
+        run: |
+          set -euo pipefail
+          if docker buildx imagetools inspect "$IMAGE:$VERSION" >/dev/null 2>&1; then
+            echo "::error::$IMAGE:$VERSION est déjà publié : pousser une nouvelle étiquette"
+            exit 1
+          fi
+          echo "$IMAGE:$VERSION absent du registre : construction."
+
+      - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:${{ steps.v.outputs.version }}
+            ${{ env.IMAGE }}:sha-${{ steps.v.outputs.short }}
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.version=${{ steps.v.outputs.version }}
+          cache-from: type=gha,scope=design-system-react
+          cache-to: type=gha,scope=design-system-react,mode=max
+
+      - name: Résumé
+        run: |
+          echo "**design-system-react** : \`${{ steps.v.outputs.version }}\` et \`sha-${{ steps.v.outputs.short }}\` publiés" >> "$GITHUB_STEP_SUMMARY"
