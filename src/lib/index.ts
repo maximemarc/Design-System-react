@@ -28,9 +28,24 @@ export {
   RadioGroup,
   ScrollArea,
   Spinner,
+  type BreadcrumbItem,
+  type KbdSize,
+  type NotificationTone,
+  type ProgressTone,
+  type RadioOption,
+  type SpinnerSize,
+  type SpinnerVariant,
 } from '../components/lab/primitives';
 
-export { AlertDialog, ContextMenu, Dropdown, HoverCard } from '../components/lab/overlays';
+export {
+  AlertDialog,
+  ContextMenu,
+  Dropdown,
+  HoverCard,
+  type AlertTone,
+  type MenuGroup,
+  type MenuItem,
+} from '../components/lab/overlays';
 
 export { useMotionAllowed } from '../components/lab/motion';
 
