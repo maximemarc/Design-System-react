@@ -1,0 +1,788 @@
+/* Effets visuels et arrière-plans de la vitrine forma. — préfixe bg-fx-.
+   Toutes les couleurs dérivent de --accent et des jetons du thème (clair ou sombre). */
+
+@property --bg-fx-beam-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* ─── Scène : conteneur positionné qui accueille un calque d'arrière-plan ─── */
+.bg-fx-stage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  min-height: 150px;
+  border-radius: calc(var(--radius) * 0.75);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.bg-fx-stage > :not(.bg-fx-layer, .bg-fx-canvas, .bg-fx-beam, .bg-fx-border-beam) {
+  position: relative;
+  z-index: 1;
+}
+.bg-fx-stage-content {
+  display: grid;
+  gap: 4px;
+  text-align: center;
+  padding: 16px;
+}
+.bg-fx-stage-content strong {
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+.bg-fx-stage-content strong,
+.bg-fx-hint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.bg-fx-hint {
+  font-size: 11px;
+  color: var(--muted);
+}
+.bg-fx-stage-content span {
+  font-size: 11px;
+  color: var(--muted);
+}
+.bg-fx-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─── Marquee ─── */
+.bg-fx-marquee {
+  --bg-fx-marquee-gap: 16px;
+  --bg-fx-marquee-duration: 20s;
+  position: relative;
+  display: flex;
+  min-width: 0;
+}
+.bg-fx-marquee-viewport {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.bg-fx-marquee.is-vertical .bg-fx-marquee-viewport {
+  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+}
+.bg-fx-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: bg-fx-marquee-x var(--bg-fx-marquee-duration) linear infinite;
+}
+.bg-fx-marquee.is-vertical .bg-fx-marquee-track {
+  flex-direction: column;
+  width: auto;
+  height: max-content;
+  animation-name: bg-fx-marquee-y;
+}
+.bg-fx-marquee.is-reverse .bg-fx-marquee-track {
+  animation-direction: reverse;
+}
+.bg-fx-marquee.is-pausable .bg-fx-marquee-viewport:hover .bg-fx-marquee-track,
+.bg-fx-marquee.is-pausable .bg-fx-marquee-viewport:focus-within .bg-fx-marquee-track,
+.bg-fx-marquee.is-paused .bg-fx-marquee-track {
+  animation-play-state: paused;
+}
+.bg-fx-marquee-group {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--bg-fx-marquee-gap);
+  padding-right: var(--bg-fx-marquee-gap);
+}
+.bg-fx-marquee.is-vertical .bg-fx-marquee-group {
+  flex-direction: column;
+  padding-right: 0;
+  padding-bottom: var(--bg-fx-marquee-gap);
+}
+.bg-fx-marquee-toggle {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  color: var(--muted);
+  box-shadow: var(--elevated-shadow);
+}
+.bg-fx-marquee-toggle:hover {
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+.bg-fx-marquee.is-vertical .bg-fx-marquee-toggle {
+  top: auto;
+  bottom: 6px;
+  transform: none;
+}
+.bg-fx-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--accent-line);
+  background: var(--soft-accent);
+  color: var(--accent-ink);
+  font-size: 11px;
+  font-weight: 500;
+}
+@keyframes bg-fx-marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes bg-fx-marquee-y {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+/* ─── Meteors ─── */
+.bg-fx-meteor {
+  position: absolute;
+  top: var(--bg-fx-top);
+  left: var(--bg-fx-left);
+  width: var(--bg-fx-length);
+  height: 1px;
+  transform-origin: left center;
+  transform: rotate(215deg);
+  background: linear-gradient(to right, var(--accent), transparent);
+  opacity: 0.55;
+  animation: bg-fx-meteor var(--bg-fx-duration) linear var(--bg-fx-delay) infinite backwards;
+}
+.bg-fx-meteor::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  background: var(--accent);
+  box-shadow: 0 0 8px 2px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+@keyframes bg-fx-meteor {
+  0% {
+    transform: rotate(215deg) translateX(0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.9;
+  }
+  70% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: rotate(215deg) translateX(-420px);
+    opacity: 0;
+  }
+}
+
+/* ─── Canvas (Particles, Confetti, Globe) ─── */
+.bg-fx-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+.bg-fx-particles {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.bg-fx-particles > :not(.bg-fx-canvas) {
+  position: relative;
+  z-index: 1;
+}
+.bg-fx-confetti {
+  position: relative;
+}
+.bg-fx-confetti > .bg-fx-canvas {
+  z-index: 2;
+}
+.bg-fx-globe {
+  position: relative;
+  width: min(100%, var(--bg-fx-globe-size, 220px));
+  aspect-ratio: 1;
+  margin-inline: auto;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.bg-fx-globe.is-dragging {
+  cursor: grabbing;
+}
+
+/* ─── AuroraBackground ─── */
+.bg-fx-aurora {
+  overflow: hidden;
+}
+.bg-fx-aurora span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.4;
+}
+.bg-fx-aurora span:nth-child(1) {
+  top: -30%;
+  left: -15%;
+  width: 70%;
+  height: 80%;
+  background: radial-gradient(ellipse at center, var(--accent) 0%, transparent 65%);
+  animation: bg-fx-aurora-1 18s ease-in-out infinite;
+}
+.bg-fx-aurora span:nth-child(2) {
+  bottom: -25%;
+  right: -15%;
+  width: 65%;
+  height: 75%;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in oklch, var(--accent) 60%, var(--text)) 0%,
+    transparent 65%
+  );
+  animation: bg-fx-aurora-2 22s ease-in-out infinite;
+}
+.bg-fx-aurora span:nth-child(3) {
+  top: 15%;
+  right: 10%;
+  width: 50%;
+  height: 60%;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in oklch, var(--accent) 55%, var(--surface)) 0%,
+    transparent 65%
+  );
+  animation: bg-fx-aurora-3 26s ease-in-out infinite;
+}
+@keyframes bg-fx-aurora-1 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(12%, -10%) scale(1.15);
+  }
+  66% {
+    transform: translate(-6%, 8%) scale(0.95);
+  }
+}
+@keyframes bg-fx-aurora-2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1.05);
+  }
+  33% {
+    transform: translate(-12%, 6%) scale(0.9);
+  }
+  66% {
+    transform: translate(8%, -10%) scale(1.15);
+  }
+}
+@keyframes bg-fx-aurora-3 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(0.95);
+  }
+  50% {
+    transform: translate(-10%, 12%) scale(1.1);
+  }
+}
+
+/* ─── BorderBeam ─── */
+.bg-fx-border-beam {
+  --bg-fx-beam-width: 1.5px;
+  --bg-fx-beam-duration: 4s;
+  --bg-fx-beam-size: 25%;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  padding: var(--bg-fx-beam-width);
+  background: conic-gradient(
+    from var(--bg-fx-beam-angle),
+    transparent 0%,
+    transparent calc(100% - var(--bg-fx-beam-size)),
+    color-mix(in srgb, var(--accent) 30%, transparent) calc(100% - var(--bg-fx-beam-size) / 2),
+    var(--accent) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  animation: bg-fx-beam-spin var(--bg-fx-beam-duration) linear infinite;
+}
+@keyframes bg-fx-beam-spin {
+  to {
+    --bg-fx-beam-angle: 360deg;
+  }
+}
+.bg-fx-card {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  padding: 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--elevated-shadow);
+}
+.bg-fx-card > .bg-fx-border-beam {
+  inset: -1px;
+}
+.bg-fx-card.is-plain {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+.bg-fx-card strong {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+.bg-fx-card span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ─── ShineBorder ─── */
+.bg-fx-shine {
+  --bg-fx-shine-width: 1px;
+  --bg-fx-shine-duration: 8s;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.bg-fx-shine::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: var(--bg-fx-shine-width);
+  pointer-events: none;
+  background: linear-gradient(
+      115deg,
+      var(--accent-line) 0%,
+      var(--accent-line) 35%,
+      var(--accent) 50%,
+      var(--accent-line) 65%,
+      var(--accent-line) 100%
+    )
+    0 0 / 300% 300%;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  animation: bg-fx-shine-move var(--bg-fx-shine-duration) linear infinite;
+}
+.bg-fx-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    color-mix(in srgb, var(--accent) 18%, transparent) 50%,
+    transparent 62%
+  );
+  transform: translateX(-110%);
+}
+.bg-fx-shine:hover::after,
+.bg-fx-shine:focus-within::after {
+  transform: translateX(110%);
+  transition: transform calc(var(--motion-duration) * 5) ease-in-out;
+}
+.bg-fx-shine-content {
+  position: relative;
+  z-index: 1;
+}
+@keyframes bg-fx-shine-move {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* ─── AnimatedBeam ─── */
+.bg-fx-beam {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.bg-fx-beam-track {
+  fill: none;
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+}
+.bg-fx-beam-pulse {
+  fill: none;
+  stroke: var(--accent);
+  stroke-linecap: round;
+  stroke-dasharray: 18 82;
+  stroke-dashoffset: 100;
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--accent) 55%, transparent));
+  animation: bg-fx-beam-travel var(--bg-fx-beam-duration, 3s) linear var(--bg-fx-beam-delay, 0s) infinite;
+}
+.bg-fx-beam.is-reverse .bg-fx-beam-pulse {
+  animation-direction: reverse;
+}
+.bg-fx-beam-end {
+  fill: var(--accent);
+}
+@keyframes bg-fx-beam-travel {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+.bg-fx-beam-demo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 16px;
+}
+.bg-fx-node {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--accent-line);
+  background: var(--surface);
+  color: var(--accent-ink);
+  box-shadow: var(--elevated-shadow);
+}
+.bg-fx-node.is-small {
+  width: 34px;
+  height: 34px;
+}
+.bg-fx-node-column {
+  display: grid;
+  gap: 12px;
+}
+
+/* ─── AnimatedGradient ─── */
+.bg-fx-gradient {
+  --bg-fx-gradient-duration: 8s;
+  position: relative;
+  border-radius: calc(var(--radius) * 0.75);
+  background-image: linear-gradient(
+    45deg,
+    var(--accent),
+    color-mix(in oklch, var(--accent) 55%, var(--text)),
+    color-mix(in oklch, var(--accent) 45%, var(--surface)),
+    color-mix(in oklch, var(--accent) 80%, var(--text)),
+    var(--accent)
+  );
+  background-size: 300% 300%;
+  color: var(--on-accent);
+  animation: bg-fx-gradient-shift var(--bg-fx-gradient-duration) ease infinite;
+}
+.bg-fx-gradient.is-radial {
+  background-image:
+    radial-gradient(
+      ellipse at 20% 50%,
+      color-mix(in srgb, var(--accent) 55%, transparent) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 80% 20%,
+      color-mix(in oklch, var(--accent) 50%, var(--text)) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 60% 85%,
+      color-mix(in srgb, var(--accent) 40%, transparent) 0%,
+      transparent 60%
+    ),
+    linear-gradient(var(--soft-accent), var(--soft-accent));
+  color: var(--text);
+}
+@keyframes bg-fx-gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ─── AnimatedGrid ─── */
+.bg-fx-grid-base,
+.bg-fx-grid-accent {
+  position: absolute;
+  inset: 0;
+}
+.bg-fx-grid-base {
+  background-image:
+    linear-gradient(var(--border-strong) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-strong) 1px, transparent 1px);
+  background-size: var(--bg-fx-cell) var(--bg-fx-cell);
+  opacity: 0.5;
+  animation: bg-fx-grid-pulse 6s ease-in-out infinite;
+}
+.bg-fx-grid-accent {
+  background-image:
+    linear-gradient(var(--accent) 1px, transparent 1px),
+    linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+  background-size: calc(var(--bg-fx-cell) * 4) calc(var(--bg-fx-cell) * 4);
+  opacity: 0.25;
+  animation: bg-fx-grid-pulse-accent 8s ease-in-out 2s infinite;
+}
+@keyframes bg-fx-grid-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+@keyframes bg-fx-grid-pulse-accent {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* ─── DotsPattern et GridBackground ─── */
+.bg-fx-dots {
+  background-image: radial-gradient(
+    circle,
+    var(--border-strong) var(--bg-fx-dot),
+    transparent var(--bg-fx-dot)
+  );
+  background-size: var(--bg-fx-cell) var(--bg-fx-cell);
+}
+.bg-fx-dots.is-accent {
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 55%, var(--border-strong)) var(--bg-fx-dot),
+    transparent var(--bg-fx-dot)
+  );
+}
+.bg-fx-grid {
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: var(--bg-fx-cell) var(--bg-fx-cell);
+  background-position: center;
+}
+.bg-fx-grid.is-accent {
+  background-image:
+    linear-gradient(var(--accent-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--accent-line) 1px, transparent 1px);
+}
+.bg-fx-fade {
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+}
+
+/* ─── NoiseBg ─── */
+.bg-fx-noise {
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  mix-blend-mode: multiply;
+}
+.app.dark .bg-fx-noise {
+  mix-blend-mode: screen;
+  filter: invert(1);
+}
+.bg-fx-noise-wash {
+  background:
+    radial-gradient(circle at 25% 20%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%),
+    var(--soft-accent);
+}
+
+/* ─── GradientMesh ─── */
+.bg-fx-mesh {
+  overflow: hidden;
+}
+.bg-fx-mesh span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(36px);
+}
+.bg-fx-mesh span:nth-child(1) {
+  top: -25%;
+  left: -10%;
+  width: 60%;
+  height: 70%;
+  background: radial-gradient(ellipse at center, var(--accent) 0%, transparent 70%);
+  opacity: 0.35;
+}
+.bg-fx-mesh span:nth-child(2) {
+  top: 25%;
+  right: -10%;
+  width: 50%;
+  height: 65%;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in oklch, var(--accent) 55%, var(--text)) 0%,
+    transparent 70%
+  );
+  opacity: 0.25;
+}
+.bg-fx-mesh span:nth-child(3) {
+  bottom: -20%;
+  left: 20%;
+  width: 55%;
+  height: 55%;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in oklch, var(--accent) 50%, var(--surface)) 0%,
+    transparent 70%
+  );
+  opacity: 0.45;
+}
+
+/* ─── WaveBackground ─── */
+.bg-fx-waves {
+  overflow: hidden;
+}
+.bg-fx-waves-inner {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 70%;
+}
+.bg-fx-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  fill: var(--accent);
+}
+.bg-fx-wave:nth-child(1) {
+  fill-opacity: 0.1;
+  animation: bg-fx-wave-left 28s linear infinite;
+}
+.bg-fx-wave:nth-child(2) {
+  height: 85%;
+  fill: color-mix(in oklch, var(--accent) 60%, var(--text));
+  fill-opacity: 0.1;
+  animation: bg-fx-wave-right 40s linear infinite;
+}
+.bg-fx-wave:nth-child(3) {
+  height: 65%;
+  fill-opacity: 0.14;
+  animation: bg-fx-wave-left 55s linear infinite;
+}
+@keyframes bg-fx-wave-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes bg-fx-wave-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* ─── Démos ─── */
+.bg-fx-demo-stack {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+.bg-fx-marquee-vertical-demo {
+  height: 130px;
+}
+.bg-fx-confetti-demo {
+  display: grid;
+  place-items: center;
+  min-height: 150px;
+}
+
+/* ─── Mouvement réduit : rendu statique ─── */
+@media (prefers-reduced-motion: reduce) {
+  .bg-fx-marquee-viewport {
+    overflow: auto;
+    scrollbar-width: thin;
+  }
+  .bg-fx-marquee-toggle,
+  .bg-fx-marquee-group[aria-hidden='true'] {
+    display: none;
+  }
+  .bg-fx-meteor {
+    opacity: 0.45;
+  }
+  .bg-fx-beam-pulse {
+    stroke-dasharray: none;
+    opacity: 0.55;
+  }
+  .bg-fx-shine::after {
+    display: none;
+  }
+}
+.no-motion .bg-fx-marquee-viewport {
+  overflow: auto;
+  scrollbar-width: thin;
+}
+.no-motion .bg-fx-marquee-toggle,
+.no-motion .bg-fx-marquee-group[aria-hidden='true'] {
+  display: none;
+}
+.no-motion .bg-fx-meteor {
+  opacity: 0.45;
+}
+.no-motion .bg-fx-beam-pulse {
+  stroke-dasharray: none;
+  opacity: 0.55;
+}
+.no-motion .bg-fx-shine::after {
+  display: none;
+}

@@ -1,0 +1,78 @@
+import { type LabEntry } from '@/components/lab/labTypes';
+import {
+  AlertDialogDemo,
+  CodeBlockDemo,
+  ContextMenuDemo,
+  DockDemo,
+  DropdownDemo,
+  HoverCardDemo,
+  TerminalDemo,
+  TreeViewDemo,
+} from '@/components/lab/overlaysDemos';
+
+export const overlaysCatalog: LabEntry[] = [
+  {
+    id: 'dropdown',
+    name: 'Menu déroulant',
+    category: 'Superposition',
+    description: 'Groupes, raccourcis, cases à cocher et actions destructives au clavier.',
+    Demo: DropdownDemo,
+    code: `<Dropdown label="Actions" groups={[{ id: 'fichier', label: 'Fichier', items: [{ id: 'renommer', label: 'Renommer', shortcut: 'F2', onSelect: renommer }] }]} />`,
+  },
+  {
+    id: 'context-menu',
+    name: 'Menu contextuel',
+    category: 'Superposition',
+    description: 'Clic droit, touche Menu ou Maj+F10, toujours maintenu dans la fenêtre.',
+    Demo: ContextMenuDemo,
+    code: `<ContextMenu zoneLabel="Fichier" groups={[{ id: 'edition', items: [{ id: 'copier', label: 'Copier', onSelect: copier }] }]}>…</ContextMenu>`,
+  },
+  {
+    id: 'hover-card',
+    name: 'Carte au survol',
+    category: 'Superposition',
+    description: 'Aperçu enrichi au survol ou au focus, avec délais d’ouverture et de fermeture.',
+    Demo: HoverCardDemo,
+    code: `<HoverCard trigger={<button>@marie</button>} openDelay={350}><Profil /></HoverCard>`,
+  },
+  {
+    id: 'alert-dialog',
+    name: 'Confirmation',
+    category: 'Superposition',
+    description: 'Dialogue d’alerte modal, focus sur « Annuler » et saisie de confirmation.',
+    Demo: AlertDialogDemo,
+    code: `<AlertDialog open={open} onClose={fermer} onConfirm={supprimer} title="Supprimer ?" confirmText="mon-projet" />`,
+  },
+  {
+    id: 'tree-view',
+    name: 'Arborescence',
+    category: 'Navigation',
+    description: 'Dossiers repliables et navigation clavier conforme au motif WAI-ARIA.',
+    Demo: TreeViewDemo,
+    code: `<TreeView label="Fichiers" nodes={noeuds} defaultExpanded={['src']} onSelect={ouvrir} />`,
+  },
+  {
+    id: 'dock',
+    name: 'Dock',
+    category: 'Navigation',
+    description: 'Barre d’icônes qui grossit sous le pointeur, avec infobulles et flèches.',
+    Demo: DockDemo,
+    code: `<Dock label="Applications" items={[{ id: 'courrier', label: 'Courrier', icon: <Mail />, badge: 3 }]} />`,
+  },
+  {
+    id: 'code-block',
+    name: 'Bloc de code',
+    category: 'Affichage',
+    description: 'Coloration TS, CSS et Bash, numéros de ligne et bouton copier.',
+    Demo: CodeBlockDemo,
+    code: `<CodeBlock language="ts" title="useTheme.ts" code={source} highlight={[4]} />`,
+  },
+  {
+    id: 'terminal',
+    name: 'Terminal',
+    category: 'Affichage',
+    description: 'Rejoue une session de commandes avec frappe animée.',
+    Demo: TerminalDemo,
+    code: `<Terminal title="bash" lines={[{ kind: 'command', text: 'npm run build' }, { kind: 'success', text: 'Terminé' }]} />`,
+  },
+];

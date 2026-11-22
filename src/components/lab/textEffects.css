@@ -1,0 +1,636 @@
+/* Effets visuels de la vitrine (lot « textEffects »). Couleurs dérivées de --accent. */
+
+.tx-fx-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Démos */
+.tx-fx-demo {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+}
+.tx-fx-demo-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text);
+}
+.tx-fx-demo-big {
+  font-family: 'Manrope', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+.tx-fx-demo-hint {
+  font-size: 11px;
+  color: var(--muted);
+}
+.tx-fx-demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Machine à écrire */
+.tx-fx-typewriter {
+  white-space: pre-wrap;
+}
+.tx-fx-typewriter-text {
+  color: var(--accent-ink);
+}
+.tx-fx-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 2px;
+  vertical-align: -0.12em;
+  background: var(--accent);
+  border-radius: 1px;
+  animation: tx-fx-blink 1s steps(1, end) infinite;
+}
+@keyframes tx-fx-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Rotation de mots */
+.tx-fx-rotate {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding: 0 0.05em;
+}
+.tx-fx-rotate-word {
+  display: inline-block;
+  color: var(--accent-ink);
+  animation: tx-fx-word-in 300ms ease both;
+}
+.tx-fx-rotate-word[data-leaving] {
+  animation: tx-fx-word-out 300ms ease both;
+}
+@keyframes tx-fx-word-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes tx-fx-word-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-0.6em);
+  }
+}
+
+/* Glitch */
+.tx-fx-glitch {
+  position: relative;
+  display: inline-block;
+  --tx-glitch-speed: 1.4s;
+  --tx-glitch-shift: 3px;
+}
+.tx-fx-glitch[data-intensity='low'] {
+  --tx-glitch-speed: 2.4s;
+  --tx-glitch-shift: 2px;
+}
+.tx-fx-glitch[data-intensity='high'] {
+  --tx-glitch-speed: 0.7s;
+  --tx-glitch-shift: 5px;
+}
+.tx-fx-glitch-main {
+  position: relative;
+}
+.tx-fx-glitch-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  clip-path: inset(0 0 100% 0);
+}
+.tx-fx-glitch-layer[data-layer='a'] {
+  color: var(--accent);
+}
+.tx-fx-glitch-layer[data-layer='b'] {
+  color: color-mix(in srgb, var(--accent) 40%, var(--text));
+}
+@supports (color: oklch(from red l c h)) {
+  .tx-fx-glitch-layer[data-layer='b'] {
+    color: oklch(from var(--accent) l c calc(h + 150));
+  }
+}
+.tx-fx-glitch[data-trigger='always'] .tx-fx-glitch-layer[data-layer='a'],
+.tx-fx-glitch[data-trigger='hover']:hover .tx-fx-glitch-layer[data-layer='a'] {
+  animation: tx-fx-glitch-a var(--tx-glitch-speed) steps(1, end) infinite;
+}
+.tx-fx-glitch[data-trigger='always'] .tx-fx-glitch-layer[data-layer='b'],
+.tx-fx-glitch[data-trigger='hover']:hover .tx-fx-glitch-layer[data-layer='b'] {
+  animation: tx-fx-glitch-b var(--tx-glitch-speed) steps(1, end) infinite;
+}
+@keyframes tx-fx-glitch-a {
+  0% {
+    clip-path: inset(18% 0 58% 0);
+    transform: translate(calc(var(--tx-glitch-shift) * -1), 0);
+  }
+  12% {
+    clip-path: inset(62% 0 12% 0);
+    transform: translate(var(--tx-glitch-shift), 1px);
+  }
+  24% {
+    clip-path: inset(0 0 100% 0);
+    transform: none;
+  }
+  58% {
+    clip-path: inset(38% 0 36% 0);
+    transform: translate(calc(var(--tx-glitch-shift) * -1), -1px);
+  }
+  68%,
+  100% {
+    clip-path: inset(0 0 100% 0);
+    transform: none;
+  }
+}
+@keyframes tx-fx-glitch-b {
+  0% {
+    clip-path: inset(70% 0 6% 0);
+    transform: translate(var(--tx-glitch-shift), 0);
+  }
+  14% {
+    clip-path: inset(8% 0 72% 0);
+    transform: translate(calc(var(--tx-glitch-shift) * -1), -1px);
+  }
+  26% {
+    clip-path: inset(0 0 100% 0);
+    transform: none;
+  }
+  62% {
+    clip-path: inset(46% 0 30% 0);
+    transform: translate(var(--tx-glitch-shift), 1px);
+  }
+  72%,
+  100% {
+    clip-path: inset(0 0 100% 0);
+    transform: none;
+  }
+}
+
+/* Néon */
+.tx-fx-neon {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--accent-ink);
+  text-shadow:
+    0 0 4px color-mix(in srgb, var(--accent) 70%, transparent),
+    0 0 12px color-mix(in srgb, var(--accent) 55%, transparent),
+    0 0 28px color-mix(in srgb, var(--accent) 40%, transparent),
+    0 0 56px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+.tx-fx-neon[data-pulse] {
+  animation: tx-fx-neon-pulse 2.6s ease-in-out infinite;
+}
+@keyframes tx-fx-neon-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 0.82;
+  }
+  90% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 0.45;
+  }
+  94% {
+    opacity: 1;
+  }
+}
+.tx-fx-neon-plate {
+  padding: 14px 18px;
+  border-radius: calc(var(--radius) * 0.75);
+  border: 1px solid var(--accent-line);
+  background: color-mix(in srgb, var(--accent) 6%, var(--muted-surface));
+}
+
+/* Dégradé de texte */
+.tx-fx-gradient {
+  --tx-fx-stop-a: color-mix(in srgb, var(--accent) 55%, var(--text));
+  --tx-fx-stop-b: color-mix(in srgb, var(--accent) 70%, var(--muted));
+  display: inline-block;
+  background-image: linear-gradient(
+    90deg,
+    var(--accent),
+    var(--tx-fx-stop-a),
+    var(--tx-fx-stop-b),
+    var(--accent)
+  );
+  background-size: 200% auto;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+@supports (color: oklch(from red l c h)) {
+  .tx-fx-gradient {
+    --tx-fx-stop-a: oklch(from var(--accent) l c calc(h + 55));
+    --tx-fx-stop-b: oklch(from var(--accent) l c calc(h - 45));
+  }
+}
+.tx-fx-gradient[data-animated] {
+  animation: tx-fx-gradient-shift 6s linear infinite;
+}
+@keyframes tx-fx-gradient-shift {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 200% 50%;
+  }
+}
+@media (forced-colors: active) {
+  .tx-fx-gradient {
+    background: none;
+    color: CanvasText;
+    -webkit-text-fill-color: currentColor;
+  }
+}
+
+/* Apparition floutée */
+.tx-fx-blur {
+  transition:
+    opacity var(--tx-blur-duration, 500ms) ease,
+    transform var(--tx-blur-duration, 500ms) ease,
+    filter var(--tx-blur-duration, 500ms) ease;
+  transition-delay: var(--tx-blur-delay, 0ms);
+}
+.tx-fx-blur:not([data-visible]) {
+  opacity: 0;
+  filter: blur(var(--tx-blur-amount, 8px));
+  transform: translateY(var(--tx-blur-offset, 10px));
+}
+.tx-fx-blur-list {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  max-width: 240px;
+}
+.tx-fx-blur-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: calc(var(--radius) * 0.5);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 12px;
+  text-align: left;
+}
+.tx-fx-blur-item svg {
+  color: var(--accent-ink);
+}
+
+/* Bandeau à vitesse de défilement */
+.tx-fx-velocity {
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.tx-fx-velocity-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  white-space: nowrap;
+  will-change: transform;
+}
+.tx-fx-velocity-group {
+  display: flex;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.tx-fx-velocity-item {
+  font-family: 'Manrope', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text);
+}
+.tx-fx-velocity-item[data-tone='accent'] {
+  color: var(--accent-ink);
+}
+
+/* Carte inclinable */
+.tx-fx-tilt {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--elevated-shadow);
+  transform: perspective(800px) rotateX(var(--tx-tilt-x, 0deg)) rotateY(var(--tx-tilt-y, 0deg))
+    scale(var(--tx-tilt-scale, 1));
+  transition: transform 150ms ease-out;
+  will-change: transform;
+}
+.tx-fx-tilt-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: var(--tx-glare-opacity, 0);
+  background: linear-gradient(
+    var(--tx-glare-angle, 180deg),
+    color-mix(in srgb, var(--on-accent) 45%, transparent) 0%,
+    transparent 60%
+  );
+  transition: opacity 200ms ease;
+}
+
+/* Carte magique : halo sur la bordure */
+.tx-fx-magic {
+  --tx-mx: -9999px;
+  --tx-my: -9999px;
+  position: relative;
+  padding: 1px;
+  border-radius: var(--radius);
+  background:
+    radial-gradient(
+      var(--tx-magic-size, 180px) circle at var(--tx-mx) var(--tx-my),
+      var(--accent),
+      color-mix(in srgb, var(--accent) 35%, transparent) 45%,
+      transparent 100%
+    ),
+    var(--border);
+  transition: box-shadow var(--motion-duration);
+}
+.tx-fx-magic:hover {
+  box-shadow: var(--elevated-shadow);
+}
+.tx-fx-magic-inner {
+  height: 100%;
+  border-radius: calc(var(--radius) - 1px);
+  background:
+    radial-gradient(
+      var(--tx-magic-size, 180px) circle at var(--tx-mx) var(--tx-my),
+      color-mix(in srgb, var(--accent) 10%, transparent),
+      transparent 80%
+    ),
+    var(--surface);
+}
+
+/* Carte lumineuse */
+.tx-fx-glow {
+  --tx-gx: 50%;
+  --tx-gy: 50%;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition:
+    border-color var(--motion-duration),
+    box-shadow var(--motion-duration);
+}
+.tx-fx-glow::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: var(--tx-gx);
+  top: var(--tx-gy);
+  width: var(--tx-glow-size, 260px);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 32%, transparent), transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+}
+.tx-fx-glow:hover,
+.tx-fx-glow:focus-within {
+  border-color: var(--accent-line);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent),
+    0 10px 30px -10px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+.tx-fx-glow:hover::before,
+.tx-fx-glow:focus-within::before {
+  opacity: 1;
+}
+
+/* Contenu commun des cartes de démo */
+.tx-fx-card-body {
+  display: grid;
+  gap: 4px;
+  padding: 16px;
+  text-align: left;
+}
+.tx-fx-card-body strong {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+}
+.tx-fx-card-body p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.tx-fx-card-icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 6px;
+  border-radius: calc(var(--radius) * 0.5);
+  background: var(--soft-accent);
+  color: var(--accent-ink);
+}
+.tx-fx-card-demo {
+  width: 100%;
+  max-width: 260px;
+}
+
+/* Bouton magnétique */
+.tx-fx-magnet {
+  display: inline-flex;
+  padding: var(--tx-magnet-zone, 24px);
+}
+.tx-fx-magnet-button {
+  transform: translate(var(--tx-magnet-x, 0px), var(--tx-magnet-y, 0px));
+  transition:
+    transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    background var(--motion-duration),
+    box-shadow var(--motion-duration);
+}
+
+/* Onde au clic */
+.tx-fx-ripple {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.tx-fx-ripple-wave {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0;
+  transform: scale(0);
+  pointer-events: none;
+  animation: tx-fx-ripple var(--tx-ripple-duration, 600ms) ease-out forwards;
+}
+@keyframes tx-fx-ripple {
+  from {
+    opacity: 0.32;
+    transform: scale(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+/* Curseur personnalisé (limité à sa zone) */
+.tx-fx-cursor-demo {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+}
+.tx-fx-cursor-styles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+}
+.tx-fx-cursor-styles button {
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 11px;
+}
+.tx-fx-cursor-styles button[aria-pressed='true'] {
+  border-color: var(--accent-line);
+  background: var(--soft-accent);
+  color: var(--accent-ink);
+}
+.tx-fx-cursor-zone {
+  position: relative;
+  display: grid;
+  place-items: center;
+  gap: 6px;
+  min-height: 116px;
+  padding: 12px;
+  overflow: hidden;
+  border-radius: calc(var(--radius) * 0.75);
+  border: 1px dashed var(--border-strong);
+  background: var(--muted-surface);
+  font-size: 11px;
+  color: var(--muted);
+}
+.tx-fx-cursor-zone[data-active],
+.tx-fx-cursor-zone[data-active] * {
+  cursor: none;
+}
+.tx-fx-cursor-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+.tx-fx-cursor-zone[data-inside] .tx-fx-cursor-layer {
+  opacity: 1;
+}
+.tx-fx-cursor-dot,
+.tx-fx-cursor-ring,
+.tx-fx-cursor-trail,
+.tx-fx-cursor-target {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  will-change: transform;
+}
+.tx-fx-cursor-dot {
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  background: var(--accent);
+}
+.tx-fx-cursor-ring {
+  width: 32px;
+  height: 32px;
+  margin: -16px 0 0 -16px;
+  border: 1.5px solid var(--accent);
+  transition:
+    width 200ms ease,
+    height 200ms ease,
+    margin 200ms ease,
+    background 200ms ease;
+}
+.tx-fx-cursor-zone[data-hover] .tx-fx-cursor-ring {
+  width: 50px;
+  height: 50px;
+  margin: -25px 0 0 -25px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.tx-fx-cursor-trail {
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  background: var(--accent);
+}
+.tx-fx-cursor-line-h,
+.tx-fx-cursor-line-v {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: color-mix(in srgb, var(--accent) 55%, transparent);
+  will-change: transform;
+}
+.tx-fx-cursor-line-h {
+  width: 100%;
+  height: 1px;
+}
+.tx-fx-cursor-line-v {
+  width: 1px;
+  height: 100%;
+}
+.tx-fx-cursor-target {
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border: 1.5px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.tx-fx-cursor-zone[data-hover] .tx-fx-cursor-target {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+}

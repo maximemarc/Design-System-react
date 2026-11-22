@@ -27,6 +27,13 @@ import Showcase from '@/components/Showcase';
 import DashboardShowcase from '@/components/DashboardShowcase';
 import ThemeLibrary from '@/components/ThemeLibrary';
 import LabExamples from '@/components/lab/LabExamples';
+import ComponentLab from '@/components/lab/ComponentLab';
+import {
+  effectsCatalog,
+  effectsStartNumber,
+  labCatalog,
+  showcaseComponentCount,
+} from '@/components/lab/labCatalog';
 import { useSavedThemes } from '@/components/useSavedThemes';
 import {
   accentContrast,
@@ -237,7 +244,10 @@ function App() {
             >
               <Icon size={18} />
               <span>{name}</span>
-              {name === 'Composants' && <span className="nav-count">37</span>}
+              {name === 'Composants' && (
+                <span className="nav-count">{showcaseComponentCount + labCatalog.length}</span>
+              )}
+              {name === 'Animations' && <span className="nav-count">{effectsCatalog.length}</span>}
               {page === name && <span className="nav-dot" />}
             </button>
           ))}
@@ -538,6 +548,18 @@ function App() {
                     ),
                   )}
                 </div>
+              )}
+              {page === 'Animations' && (
+                <ComponentLab
+                  id="effets"
+                  notify={notify}
+                  entries={effectsCatalog}
+                  categories={['Effets']}
+                  startNumber={effectsStartNumber}
+                  eyebrow="Effets"
+                  title={`${effectsCatalog.length} effets pour donner du relief.`}
+                  intro="Textes animés, cartes réactives et fonds vivants. Tous suivent votre couleur d’accent et se figent quand les animations sont coupées."
+                />
               )}
               {page === 'Modèles' && <LabExamples notify={notify} />}
               {page === 'Modèles' && (
