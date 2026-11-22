@@ -35,6 +35,13 @@ import {
 import { passwordScore } from '@/components/lab/password';
 import { Carousel, NumberTicker, ProgressRing, SpotlightCard } from '@/components/lab/display';
 import { CommandPalette, KanbanBoard, type KanbanCard } from '@/components/lab/workflow';
+import { AuthTemplate, ContactTemplate, SettingsTemplate } from '@/components/templates/forms';
+import {
+  ActivityFeedTemplate,
+  CommandCenterTemplate,
+  FileManagerTemplate,
+} from '@/components/templates/workspace';
+import { AnalyticsTemplate, BlogArticleTemplate, SaasLandingTemplate } from '@/components/templates/pages';
 import '@/components/lab/lab.css';
 
 const onboardingSteps = ['Compte', 'Vérification', 'Préférences', 'Prêt'];
@@ -416,7 +423,13 @@ function ProductExample({ notify }: { notify: Notify }) {
   );
 }
 
-export default function LabExamples({ notify }: { notify: Notify }) {
+export default function LabExamples({
+  notify,
+  withTemplates = false,
+}: {
+  notify: Notify;
+  withTemplates?: boolean;
+}) {
   return (
     <section className="lab-section" aria-labelledby="lab-examples-title">
       <div className="lab-header">
@@ -426,7 +439,9 @@ export default function LabExamples({ notify }: { notify: Notify }) {
           </span>
           <h2 id="lab-examples-title">Des composants aux écrans complets.</h2>
           <p>
-            Trois compositions réelles qui assemblent les pièces du laboratoire. Aucune donnée n’est envoyée.
+            {withTemplates
+              ? 'Douze compositions réelles, du formulaire à la page complète, qui assemblent les pièces du laboratoire. Aucune donnée n’est envoyée.'
+              : 'Trois compositions réelles qui assemblent les pièces du laboratoire. Retrouvez-en neuf autres dans Modèles. Aucune donnée n’est envoyée.'}
           </p>
         </div>
       </div>
@@ -434,6 +449,19 @@ export default function LabExamples({ notify }: { notify: Notify }) {
         <OnboardingExample notify={notify} />
         <ProjectExample notify={notify} />
         <ProductExample notify={notify} />
+        {withTemplates && (
+          <>
+            <ContactTemplate notify={notify} />
+            <SettingsTemplate notify={notify} />
+            <AuthTemplate notify={notify} />
+            <FileManagerTemplate notify={notify} />
+            <CommandCenterTemplate notify={notify} />
+            <ActivityFeedTemplate notify={notify} />
+            <SaasLandingTemplate notify={notify} />
+            <AnalyticsTemplate notify={notify} />
+            <BlogArticleTemplate notify={notify} />
+          </>
+        )}
       </div>
     </section>
   );

@@ -1537,82 +1537,6 @@ kbd {
 .animation-specimen .button {
   margin-top: 15px;
 }
-.template-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-.template-card {
-  text-align: left;
-}
-.template-card h3 {
-  font-size: 12px;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 18px;
-  gap: 8px;
-}
-.template-card p {
-  font-size: 10px;
-  color: var(--muted);
-  margin-top: 8px;
-}
-.mini-template {
-  height: 130px;
-  display: flex;
-  background: var(--muted-surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 9px;
-  gap: 9px;
-}
-.mini-side {
-  width: 22%;
-  background: var(--soft-accent);
-  border-radius: 4px;
-}
-.mini-content {
-  flex: 1;
-  padding: 4px 0;
-}
-.mini-content > span {
-  display: block;
-  height: 5px;
-  background: var(--border);
-  margin-bottom: 10px;
-  border-radius: 4px;
-}
-.mini-content > span:first-child {
-  background: var(--accent);
-  width: 55%;
-}
-.mini-content > div {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 12px;
-}
-.mini-content i {
-  display: block;
-  flex: 1;
-  height: 36px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-}
-.mini-1 .mini-side {
-  display: none;
-}
-.mini-1 .mini-content > span:first-child {
-  height: 20px;
-  width: 80%;
-  margin: 10px auto 14px;
-}
-.mini-2 .mini-content > div {
-  flex-direction: column;
-}
-.mini-2 .mini-content i {
-  min-height: 12px;
-}
 .mobile-toggle {
   display: none;
 }
@@ -1725,9 +1649,6 @@ kbd {
   }
   .gallery-heading > .badge {
     display: none;
-  }
-  .template-grid {
-    grid-template-columns: 1fr;
   }
   .bottom-banner button {
     font-size: 8px;
@@ -2032,9 +1953,6 @@ kbd {
   }
   .modal {
     padding: 22px;
-  }
-  .template-grid {
-    grid-template-columns: 1fr;
   }
 }
 @media (prefers-reduced-motion: reduce) {
