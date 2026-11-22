@@ -14,6 +14,13 @@
   background: var(--muted-surface);
   border: 1px solid var(--border);
 }
+.dashboard-controls > div {
+  min-width: 0;
+  max-width: 100%;
+}
+.dashboard-controls .segmented {
+  flex-wrap: wrap;
+}
 .dashboard-controls .segmented button {
   padding: 8px 12px;
   font-size: 12px;

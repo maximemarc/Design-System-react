@@ -922,6 +922,18 @@
   .tpl-p-kpis {
     grid-template-columns: 1fr;
   }
+  /* Les actions passent sous le texte de l'activité au lieu de pousser la ligne. */
+  .tpl-p-activity li {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .tpl-p-activity-side {
+    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+    min-width: 0;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .tpl-p-bar-fill,
