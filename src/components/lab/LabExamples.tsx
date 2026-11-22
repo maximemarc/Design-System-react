@@ -345,7 +345,7 @@ function ProductExample({ notify }: { notify: Notify }) {
               </Badge>
               <h3>Lampe Halo</h3>
             </div>
-            <Tooltip label={favorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}>
+            <Tooltip align="end" label={favorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}>
               <button
                 type="button"
                 className={`icon-button lab-favorite ${favorite ? 'active' : ''}`}

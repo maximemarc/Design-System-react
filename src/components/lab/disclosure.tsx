@@ -119,7 +119,16 @@ export function AnimatedTabs({ tabs, label }: { tabs: TabItem[]; label: string }
   );
 }
 
-export function Tooltip({ label, children }: { label: string; children: ReactNode }) {
+export function Tooltip({
+  label,
+  children,
+  align = 'center',
+}: {
+  label: string;
+  children: ReactNode;
+  /** Côté auquel la bulle s'aligne : « end » pour un déclencheur collé au bord droit. */
+  align?: 'start' | 'center' | 'end';
+}) {
   const [visible, setVisible] = useState(false);
   const id = useId();
   return (
@@ -135,7 +144,7 @@ export function Tooltip({ label, children }: { label: string; children: ReactNod
       aria-describedby={visible ? id : undefined}
     >
       {children}
-      <span id={id} role="tooltip" className={`lab-tooltip ${visible ? 'visible' : ''}`}>
+      <span id={id} role="tooltip" className={`lab-tooltip lab-tooltip-${align} ${visible ? 'visible' : ''}`}>
         {label}
       </span>
     </span>

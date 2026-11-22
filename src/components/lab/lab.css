@@ -308,6 +308,19 @@
   opacity: 1;
   transform: translate(-50%, 0);
 }
+.lab-tooltip-start {
+  left: 0;
+  transform: translate(0, 4px);
+}
+.lab-tooltip-end {
+  left: auto;
+  right: 0;
+  transform: translate(0, 4px);
+}
+.lab-tooltip-start.visible,
+.lab-tooltip-end.visible {
+  transform: translate(0, 0);
+}
 
 .lab-drawer {
   margin: 0 0 0 auto;
@@ -1380,7 +1393,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .lab-examples {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .lab-project-layout {
     grid-template-columns: 1fr;
@@ -1399,7 +1412,7 @@
   }
   .lab-split,
   .lab-product {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .lab-stats {
     grid-template-columns: 1fr 1fr 1fr;
