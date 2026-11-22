@@ -1,5 +1,8 @@
-import { type ComponentType } from 'react';
-import { type Notify } from '@/components/useToasts';
+import { type LabEntry } from '@/components/lab/labTypes';
+import { primitivesCatalog } from '@/components/lab/primitivesCatalog';
+import { overlaysCatalog } from '@/components/lab/overlaysCatalog';
+import { backgroundsCatalog } from '@/components/lab/backgroundsCatalog';
+import { textEffectsCatalog } from '@/components/lab/textEffectsCatalog';
 import {
   AccordionDemo,
   TabsDemo,
@@ -25,17 +28,9 @@ import {
   CommandDemo,
 } from '@/components/lab/labDemos';
 
-export type LabCategory = 'Navigation' | 'Saisie' | 'Affichage' | 'Flux de travail';
-export type LabEntry = {
-  id: string;
-  name: string;
-  category: LabCategory;
-  description: string;
-  code: string;
-  Demo: ComponentType<{ notify: Notify }>;
-};
+export type { LabCategory, LabEntry } from '@/components/lab/labTypes';
 
-export const labCatalog: LabEntry[] = [
+const baseLabCatalog: LabEntry[] = [
   {
     id: 'accordion',
     name: 'Accordéon',
@@ -213,3 +208,10 @@ export const labCatalog: LabEntry[] = [
     code: `<CommandPalette open={open} onClose={close} commands={commandes} />`,
   },
 ];
+
+/** Nombre de composants présentés avant le laboratoire, dans la vitrine principale. */
+export const showcaseComponentCount = 15;
+export const labStartNumber = showcaseComponentCount + 1;
+export const labCatalog: LabEntry[] = [...baseLabCatalog, ...primitivesCatalog, ...overlaysCatalog];
+export const effectsCatalog: LabEntry[] = [...textEffectsCatalog, ...backgroundsCatalog];
+export const effectsStartNumber = labStartNumber + labCatalog.length;

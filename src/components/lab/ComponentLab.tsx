@@ -2,11 +2,17 @@ import { useState } from 'react';
 import { Check, Code2, Copy, FlaskConical, Search } from 'lucide-react';
 import { Badge } from '@/components/ui';
 import { type Notify } from '@/components/useToasts';
-import { labCatalog, type LabCategory, type LabEntry } from '@/components/lab/labCatalog';
+import { labCatalog, labStartNumber } from '@/components/lab/labCatalog';
+import { type LabCategory, type LabEntry } from '@/components/lab/labTypes';
 import '@/components/lab/lab.css';
 
-const categories: ('Tous' | LabCategory)[] = ['Tous', 'Navigation', 'Saisie', 'Affichage', 'Flux de travail'];
-const labStartNumber = 16;
+const labCategories: LabCategory[] = [
+  'Navigation',
+  'Saisie',
+  'Affichage',
+  'Superposition',
+  'Flux de travail',
+];
 
 function LabCard({ entry, number, notify }: { entry: LabEntry; number: number; notify: Notify }) {
   const [showCode, setShowCode] = useState(false);
@@ -57,26 +63,48 @@ function LabCard({ entry, number, notify }: { entry: LabEntry; number: number; n
   );
 }
 
-export default function ComponentLab({ notify }: { notify: Notify }) {
-  const [category, setCategory] = useState<(typeof categories)[number]>('Tous');
+export default function ComponentLab({
+  notify,
+  entries = labCatalog,
+  categories: categoryList = labCategories,
+  startNumber = labStartNumber,
+  eyebrow = 'Laboratoire',
+  title = `${entries.length} composants prêts à composer.`,
+  intro = 'Chaque pièce suit vos couleurs, arrondis et animations. Testez-la, puis copiez son exemple.',
+  id = 'lab',
+}: {
+  notify: Notify;
+  entries?: LabEntry[];
+  categories?: LabCategory[];
+  startNumber?: number;
+  eyebrow?: string;
+  title?: string;
+  intro?: string;
+  id?: string;
+}) {
+  const categories: ('Tous' | LabCategory)[] = [
+    'Tous',
+    ...categoryList.filter(item => entries.some(entry => entry.category === item)),
+  ];
+  const [category, setCategory] = useState<'Tous' | LabCategory>('Tous');
   const [query, setQuery] = useState('');
   const normalized = query.trim().toLocaleLowerCase();
-  const visible = labCatalog
-    .map((entry, index) => ({ entry, number: labStartNumber + index }))
+  const visible = entries
+    .map((entry, index) => ({ entry, number: startNumber + index }))
     .filter(
       ({ entry }) =>
         (category === 'Tous' || entry.category === category) &&
         `${entry.name} ${entry.description}`.toLocaleLowerCase().includes(normalized),
     );
   return (
-    <section className="lab-section" aria-labelledby="lab-title">
+    <section className="lab-section" aria-labelledby={`${id}-title`}>
       <div className="lab-header">
         <div>
           <span className="eyebrow">
-            <FlaskConical size={13} /> Laboratoire
+            <FlaskConical size={13} /> {eyebrow}
           </span>
-          <h2 id="lab-title">{labCatalog.length} composants prêts à composer.</h2>
-          <p>Chaque pièce suit vos couleurs, arrondis et animations. Testez-la, puis copiez son exemple.</p>
+          <h2 id={`${id}-title`}>{title}</h2>
+          <p>{intro}</p>
         </div>
         <div className="lab-search input-wrap">
           <Search size={15} />
@@ -99,9 +127,7 @@ export default function ComponentLab({ notify }: { notify: Notify }) {
           >
             {item}
             <span>
-              {item === 'Tous'
-                ? labCatalog.length
-                : labCatalog.filter(entry => entry.category === item).length}
+              {item === 'Tous' ? entries.length : entries.filter(entry => entry.category === item).length}
             </span>
           </button>
         ))}
