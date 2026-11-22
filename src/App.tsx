@@ -561,40 +561,7 @@ function App() {
                   intro="Textes animés, cartes réactives et fonds vivants. Tous suivent votre couleur d’accent et se figent quand les animations sont coupées."
                 />
               )}
-              {page === 'Modèles' && <LabExamples notify={notify} />}
-              {page === 'Modèles' && (
-                <div className="template-grid">
-                  {['Tableau de bord', 'Page de présentation', 'Paramètres du compte'].map((title, index) => (
-                    <button
-                      className="specimen template-card"
-                      key={title}
-                      onClick={() => {
-                        navigate(index === 2 ? 'Fondations' : 'Composants');
-                        notify('Explorez les éléments de ce modèle et adaptez-les à votre projet.');
-                      }}
-                    >
-                      <div className={`mini-template mini-${index}`}>
-                        <div className="mini-side" />
-                        <div className="mini-content">
-                          <span />
-                          <span />
-                          <div>
-                            <i />
-                            <i />
-                            <i />
-                          </div>
-                          <span />
-                        </div>
-                      </div>
-                      <h3>
-                        {title}
-                        <ArrowRight size={17} />
-                      </h3>
-                      <p>Une composition prête à personnaliser.</p>
-                    </button>
-                  ))}
-                </div>
-              )}
+              {page === 'Modèles' && <LabExamples notify={notify} withTemplates />}
             </section>
             <div className="bottom-banner">
               <div className="banner-symbol">

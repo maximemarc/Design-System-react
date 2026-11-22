@@ -1,0 +1,411 @@
+/* Modèles « espace de travail » : gestionnaire de fichiers (G), centre de commandes (H), fil d'activité (I). */
+
+/* ─── Éléments communs ─────────────────────────────────────────────── */
+
+.tpl-w-pane-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.tpl-w-card {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.tpl-w-card h4 {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ─── G · Gestionnaire de fichiers ─────────────────────────────────── */
+
+.tpl-w-files {
+  display: grid;
+  grid-template-columns: minmax(200px, 240px) minmax(0, 1fr);
+  min-height: 360px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+.tpl-w-explorer {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-right: 1px solid var(--border);
+  background: var(--muted-surface);
+}
+.tpl-w-explorer > .ov-context-zone {
+  flex: 1;
+  display: block;
+  place-items: initial;
+  min-height: 0;
+  padding: 6px 4px;
+  min-width: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+}
+.tpl-w-explorer > .ov-context-zone.ov-open {
+  background: var(--soft-accent);
+}
+.tpl-w-preview {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.tpl-w-path {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+.tpl-w-path code {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  color: var(--text);
+}
+.tpl-w-copy {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+}
+.tpl-w-preview-body {
+  flex: 1;
+  display: grid;
+  align-content: center;
+  min-width: 0;
+  padding: 16px;
+}
+.tpl-w-file {
+  display: grid;
+  gap: 12px;
+  align-self: start;
+  min-width: 0;
+  animation: lab-fade var(--motion-duration) ease;
+}
+.tpl-w-file-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.tpl-w-file-meta small {
+  font-size: 11px;
+  color: var(--muted);
+}
+.tpl-w-file .ov-code,
+.tpl-w-file figure {
+  min-width: 0;
+  max-width: 100%;
+}
+.tpl-w-raw {
+  margin: 0;
+  padding: 12px 14px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--muted-surface);
+  color: var(--text);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.tpl-w-raw:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.tpl-w-file-rating {
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+/* ─── H · Centre de commandes ──────────────────────────────────────── */
+
+.tpl-w-launcher {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--muted-surface);
+}
+.tpl-w-launcher-text {
+  flex: 1 1 260px;
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.tpl-w-launcher-text strong {
+  font-size: 13px;
+}
+.tpl-w-launcher-text p {
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.tpl-w-last {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--success) !important;
+}
+.tpl-w-launcher-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.tpl-w-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.tpl-w-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+.tpl-w-shortcut-group {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.tpl-w-shortcut-group h4 {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.tpl-w-shortcut-group dl {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+.tpl-w-shortcut-group dl > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.tpl-w-shortcut-group dt {
+  min-width: 0;
+  font-size: 12px;
+  color: var(--text);
+}
+.tpl-w-shortcut-group dd {
+  flex-shrink: 0;
+  margin: 0;
+}
+
+/* ─── I · Fil d'activité ───────────────────────────────────────────── */
+
+.tpl-w-feed {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.tpl-w-feed-main,
+.tpl-w-feed-side {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.tpl-w-feed-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+}
+.tpl-w-feed-head strong {
+  font-size: 13px;
+  color: var(--text);
+}
+.tpl-w-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tpl-w-filters button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+  transition:
+    background var(--motion-duration) ease,
+    border-color var(--motion-duration) ease,
+    color var(--motion-duration) ease;
+}
+.tpl-w-filters button:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+.tpl-w-filters button.selected {
+  border-color: var(--accent-line);
+  background: var(--soft-accent);
+  color: var(--accent-ink);
+}
+.tpl-w-filters button span {
+  min-width: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--muted-surface);
+  font-size: 10px;
+  text-align: center;
+}
+.tpl-w-filters button.selected span {
+  background: var(--accent);
+  color: var(--on-accent, white);
+}
+.tpl-w-filters button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.tpl-w-person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.tpl-w-person > div {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+}
+.tpl-w-person strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+}
+.tpl-w-person small {
+  font-size: 10px;
+  color: var(--muted);
+}
+.tpl-w-avatar {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--soft-accent);
+  color: var(--accent-ink);
+  font-size: 11px;
+  font-weight: 600;
+}
+.tpl-w-avatar[class*='presence-']::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  background: var(--border-strong);
+}
+.tpl-w-avatar.presence-online::after {
+  background: var(--success-dot);
+}
+.tpl-w-avatar.presence-away::after {
+  background: var(--warning-dot);
+}
+.tpl-w-card blockquote {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.tpl-w-thanks {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--success);
+}
+.tpl-w-team {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ─── Adaptation aux petits écrans ─────────────────────────────────── */
+
+@media (max-width: 800px) {
+  .tpl-w-feed {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .tpl-w-files {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .tpl-w-explorer {
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .tpl-w-explorer .pr-scrollarea {
+    max-height: 180px !important;
+  }
+  .tpl-w-launcher-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tpl-w-file,
+  .tpl-w-filters button {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Le gestionnaire de fichiers a besoin de toute la largeur de la grille des exemples. */
+.lab-example.tpl-w-wide {
+  grid-column: 1 / -1;
+}
