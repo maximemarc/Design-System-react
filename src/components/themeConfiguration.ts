@@ -24,18 +24,7 @@ export function readActiveTheme(): ThemeConfiguration | null {
   }
 }
 
-export function accentContrast(color: string) {
-  const rgb = [1, 3, 5].map(index => parseInt(color.slice(index, index + 2), 16) / 255);
-  const linear = rgb.map(channel =>
-    channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4,
-  );
-  const luminance = linear[0] * 0.2126 + linear[1] * 0.7152 + linear[2] * 0.0722;
-  return {
-    onAccent: luminance > 0.179 ? '#172019' : '#ffffff',
-    lightInk: luminance > 0.183 ? '#405047' : color,
-    darkInk: luminance < 0.24 ? '#cde5d5' : color,
-  };
-}
+export { accentContrast } from '@/lib/theme';
 const toastPositions = [
   'top-left',
   'top-center',

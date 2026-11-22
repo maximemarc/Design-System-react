@@ -1,5 +1,5 @@
 import { type AnchorHTMLAttributes, type HTMLAttributes, type ReactNode } from 'react';
-import { type BentoSpan } from '@/components/dashboard/types';
+import { type BentoSpan } from './types';
 
 /** Grille de 12 colonnes qui comble les trous ; s'empile sur mobile. */
 export function BentoGrid({

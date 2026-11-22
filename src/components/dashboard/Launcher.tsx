@@ -1,6 +1,6 @@
 import { type LucideIcon } from 'lucide-react';
-import { AppIcon } from '@/components/dashboard/AppIcon';
-import { isNoteworthy, statusLabels, statusTones, type ServiceStatus } from '@/components/dashboard/types';
+import { AppIcon } from './AppIcon';
+import { isNoteworthy, statusLabels, statusTones, type ServiceStatus } from './types';
 
 export type LauncherItem = {
   id: string;

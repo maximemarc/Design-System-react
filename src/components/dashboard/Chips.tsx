@@ -1,6 +1,6 @@
 import { X, type LucideIcon } from 'lucide-react';
-import { Button } from '@/components/ui';
-import { AppIcon } from '@/components/dashboard/AppIcon';
+import { Button } from '../ui';
+import { AppIcon } from './AppIcon';
 
 /** Raccourci épinglé. En mode édition, il devient un bouton de retrait. */
 export function FavoriteChip({

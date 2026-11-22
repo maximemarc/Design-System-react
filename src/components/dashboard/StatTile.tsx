@@ -1,8 +1,8 @@
 import { type LucideIcon } from 'lucide-react';
-import { AppIcon } from '@/components/dashboard/AppIcon';
-import { Skeleton } from '@/components/dashboard/Skeleton';
-import { Tile } from '@/components/dashboard/Tile';
-import { type BentoSpan } from '@/components/dashboard/types';
+import { AppIcon } from './AppIcon';
+import { Skeleton } from './Skeleton';
+import { Tile } from './Tile';
+import { type BentoSpan } from './types';
 
 export type StatTileState = 'ok' | 'loading' | 'down' | 'locked';
 

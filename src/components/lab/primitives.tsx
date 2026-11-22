@@ -23,7 +23,7 @@ import {
   TriangleAlert,
   X,
 } from 'lucide-react';
-import { useMotionAllowed } from '@/components/lab/motion';
+import { useMotionAllowed } from './motion';
 
 /* ------------------------------------------------------------------ */
 /* Case à cocher                                                       */

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   ArrowRight,
   Blocks,
@@ -35,8 +35,8 @@ import {
   showcaseComponentCount,
 } from '@/components/lab/labCatalog';
 import { useSavedThemes } from '@/components/useSavedThemes';
+import { formaStyle } from '@/lib/theme';
 import {
-  accentContrast,
   activeThemeStorageKey,
   readActiveTheme,
   type ThemeConfiguration,
@@ -153,7 +153,6 @@ function App() {
     setDensity(configuration.density);
     setPosition(configuration.toastPosition);
   };
-  const contrast = accentContrast(accent.color);
   const exportTheme = () => {
     const file = new Blob(
       [
@@ -195,14 +194,7 @@ function App() {
     setMobileMenu(false);
     setQuery('');
   };
-  const style = {
-    '--accent': accent.color,
-    '--on-accent': contrast.onAccent,
-    '--accent-ink': dark ? contrast.darkInk : contrast.lightInk,
-    '--radius': `${radius}px`,
-    '--motion-duration': motion ? '220ms' : '0ms',
-    '--card-padding': density === 'Compact' ? '20px' : '24px',
-  } as CSSProperties;
+  const style = formaStyle({ accent: accent.color, dark, radius, motion, density });
   return (
     <div
       className={`app ${dark ? 'dark' : ''} ${!motion ? 'no-motion' : ''}`}

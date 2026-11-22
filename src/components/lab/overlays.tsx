@@ -1,4 +1,4 @@
-import '@/components/lab/overlays.css';
+import './overlays.css';
 import {
   Fragment,
   useEffect,
@@ -10,7 +10,7 @@ import {
   type ReactNode,
 } from 'react';
 import { Check, ChevronDown, Info, TriangleAlert } from 'lucide-react';
-import { Button } from '@/components/ui';
+import { Button } from '../ui';
 
 /* ─── Menus partagés (Dropdown, ContextMenu) ─────────────────────────── */
 

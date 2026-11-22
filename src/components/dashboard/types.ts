@@ -1,4 +1,4 @@
-import { type BadgeTone } from '@/components/ui';
+import { type BadgeTone } from '../ui';
 
 /** État d'un service tel qu'une sonde (Gatus, Uptime Kuma…) le rapporte. */
 export type ServiceStatus = 'up' | 'slow' | 'down' | 'unknown' | 'vpn';
