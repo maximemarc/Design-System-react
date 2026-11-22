@@ -1,4 +1,4 @@
-import { statusLabels, type ServiceStatus } from '@/components/dashboard/types';
+import { statusLabels, type ServiceStatus } from './types';
 
 const order: ServiceStatus[] = ['up', 'slow', 'down', 'unknown', 'vpn'];
 

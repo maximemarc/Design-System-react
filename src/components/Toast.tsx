@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { type Notification, type ToastPosition } from '@/components/useToasts';
+import { type Notification, type ToastPosition } from './useToasts';
 import { AlertTriangle, CheckCircle2, CircleAlert, X } from 'lucide-react';
-import '@/components/toast.css';
+import './toast.css';
 
 const labels = { success: 'Succès', warning: 'Attention', error: 'Erreur' };
 const icons = { success: CheckCircle2, warning: AlertTriangle, error: CircleAlert };

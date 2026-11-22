@@ -1,0 +1,83 @@
+/* ==========================================================================
+   forma. — jetons de thème
+
+   Les couleurs vivent sur la racine `.forma` (ou `.app`, la racine de la
+   vitrine) : clair par défaut, sombre avec la classe `dark`. Les réglages que
+   l'utilisateur peut changer (accent, rayon, mouvement, densité) ont une
+   valeur par défaut ici ; `formaStyle()` (src/lib/theme.ts) les recalcule et
+   les pose en style en ligne, qui l'emporte.
+
+   Polices : DM Sans (texte) et Manrope (titres). Le paquet ne les télécharge
+   pas : la vitrine les charge depuis Google Fonts, une application peut les
+   auto-héberger (@fontsource-variable/dm-sans et /manrope).
+   ========================================================================== */
+
+.forma {
+  --accent: #477b60;
+  --on-accent: #ffffff;
+  --radius: 12px;
+  --motion-duration: 220ms;
+  --card-padding: 24px;
+  --font-text: 'DM Sans Variable', 'DM Sans', system-ui, sans-serif;
+  --font-title: 'Manrope Variable', 'Manrope', 'DM Sans', system-ui, sans-serif;
+  font-family: var(--font-text);
+}
+.forma :where(h1, h2, h3) {
+  font-family: var(--font-title);
+}
+.forma :where(button, input, select, textarea) {
+  font: inherit;
+}
+.forma :where(button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.app,
+.forma {
+  --bg: #fafbf9;
+  --surface: #fff;
+  --muted-surface: #f5f6f3;
+  --text: #252b27;
+  --muted: #6e756d;
+  --accent-ink: var(--accent);
+  --border: #e8ebe5;
+  --border-strong: #d6dbd3;
+  --soft-accent: color-mix(in srgb, var(--accent) 9%, var(--surface));
+  --accent-line: color-mix(in srgb, var(--accent) 28%, var(--border));
+  --success-bg: #edf6ef;
+  --success: #407951;
+  --success-dot: #4f9a66;
+  --warning-bg: #fbf3e4;
+  --warning: #85570f;
+  --warning-dot: #d49a2a;
+  --danger-bg: #fbeceb;
+  --danger: #a3392e;
+  --danger-dot: #d0574a;
+  --elevated-shadow: 0 12px 25px #25463212;
+  background: var(--bg);
+  color: var(--text);
+}
+.app.dark,
+.forma.dark {
+  --bg: #171c19;
+  --surface: #1d2420;
+  --muted-surface: #252e28;
+  --text: #edf2ee;
+  --muted: #a3aea6;
+  --accent-ink: color-mix(in srgb, var(--accent) 55%, white);
+  --border: #333d36;
+  --border-strong: #46524a;
+  --soft-accent: color-mix(in srgb, var(--accent) 20%, var(--surface));
+  --accent-line: color-mix(in srgb, var(--accent) 45%, var(--border));
+  --success-bg: #263d2f;
+  --success: #9bc7a7;
+  --success-dot: #6fb184;
+  --warning-bg: #3a3020;
+  --warning: #e3c68a;
+  --warning-dot: #d9a441;
+  --danger-bg: #3d2624;
+  --danger: #eba79f;
+  --danger-dot: #e0695c;
+  --elevated-shadow: 0 12px 25px #00000040;
+}

@@ -1,0 +1,80 @@
+---
+# =============================================================================
+#  Paquet npm -> @maximemarc/forma sur GitHub Packages (npm.pkg.github.com)
+#
+#  Publié à chaque étiquette `vX.Y.Z`, comme l'image de la vitrine (image.yml) :
+#  la version du paquet doit être celle de l'étiquette (package.json), sinon le
+#  job échoue avant de publier. Une version publiée n'est JAMAIS republiée :
+#  corriger, c'est pousser une nouvelle étiquette.
+#
+#  Le paquet suit la visibilité du dépôt (public), mais GitHub Packages exige
+#  un jeton même pour l'installer : un consommateur déclare
+#    @maximemarc:registry=https://npm.pkg.github.com
+#  et s'authentifie (GITHUB_TOKEN avec packages: read en CI, après avoir donné
+#  au dépôt consommateur l'accès au paquet ; PAT classique read:packages ailleurs).
+# =============================================================================
+
+name: Paquet
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: paquet-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: '@maximemarc/forma'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          registry-url: https://npm.pkg.github.com
+          scope: '@maximemarc'
+
+      - name: Version
+        id: v
+        run: |
+          set -euo pipefail
+          v="${GITHUB_REF_NAME#v}"
+          p="$(node -p "require('./package.json').version")"
+          [[ "$v" == "$p" ]] \
+            || { echo "::error::étiquette $GITHUB_REF_NAME mais package.json en $p : aligner la version avant d'étiqueter"; exit 1; }
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+
+      - name: Version déjà publiée ?
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.v.outputs.version }}
+        run: |
+          set -euo pipefail
+          if npm view "@maximemarc/forma@$VERSION" version >/dev/null 2>&1; then
+            echo "::error::@maximemarc/forma@$VERSION est déjà publié : pousser une nouvelle étiquette"
+            exit 1
+          fi
+          echo "@maximemarc/forma@$VERSION absent du registre : publication."
+
+      - run: npm ci --no-audit --no-fund
+
+      - run: npm run typecheck
+
+      - name: Publication
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # prepublishOnly construit lib-dist (npm run build:lib).
+        run: npm publish
+
+      - name: Résumé
+        run: |
+          echo "**@maximemarc/forma** \`${{ steps.v.outputs.version }}\` publié sur GitHub Packages" >> "$GITHUB_STEP_SUMMARY"

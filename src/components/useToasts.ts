@@ -1,13 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
-import { createId } from '@/components/createId';
+import { createId } from './createId';
 
 export type ToastPosition =
-  | 'top-left'
-  | 'top-center'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-center'
-  | 'bottom-right';
+  'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right';
 export type ToastTone = 'success' | 'warning' | 'error';
 export type Notify = (message: string, tone?: ToastTone) => void;
 export type Notification = { id: string; message: string; tone: ToastTone };

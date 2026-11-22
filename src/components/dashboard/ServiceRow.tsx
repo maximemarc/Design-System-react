@@ -1,9 +1,9 @@
 import { type ReactNode } from 'react';
 import { Star, type LucideIcon } from 'lucide-react';
-import { Badge, type BadgeTone } from '@/components/ui';
-import { AppIcon } from '@/components/dashboard/AppIcon';
-import { TileLink } from '@/components/dashboard/Tile';
-import { isNoteworthy, statusLabels, statusTones, type ServiceStatus } from '@/components/dashboard/types';
+import { Badge, type BadgeTone } from '../ui';
+import { AppIcon } from './AppIcon';
+import { TileLink } from './Tile';
+import { isNoteworthy, statusLabels, statusTones, type ServiceStatus } from './types';
 
 export function StarToggle({
   name,

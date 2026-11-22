@@ -1,5 +1,5 @@
 import { type LucideIcon } from 'lucide-react';
-import { monogram } from '@/components/dashboard/types';
+import { monogram } from './types';
 
 const sizes = {
   xs: { box: 28, glyph: 18 },
