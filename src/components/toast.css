@@ -83,6 +83,10 @@
   --tone: #39724b;
   --tone-bg: #edf6ef;
 }
+.toast-info {
+  --tone: var(--accent-ink);
+  --tone-bg: color-mix(in srgb, var(--accent) 10%, var(--surface));
+}
 .toast-warning {
   --tone: #95600b;
   --tone-bg: #fff5df;
@@ -94,6 +98,10 @@
 .dark .toast-success {
   --tone: #9bc7a7;
   --tone-bg: #263d2f;
+}
+.dark .toast-info {
+  --tone: var(--accent-ink);
+  --tone-bg: color-mix(in srgb, var(--accent) 22%, var(--surface));
 }
 .dark .toast-warning {
   --tone: #ebbf71;

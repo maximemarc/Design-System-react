@@ -1,6 +1,6 @@
 {
   "name": "@maximemarc/forma",
-  "version": "1.3.0",
+  "version": "1.4.1",
   "description": "forma. — système de design React : jetons de thème clair et sombre, composants de base, tableau de bord.",
   "type": "module",
   "repository": {

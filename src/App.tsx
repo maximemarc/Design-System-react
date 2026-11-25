@@ -46,6 +46,7 @@ import { useSeasonPreferences } from '@/components/useSeasonPreferences';
 import { seasons, type Season } from '@/components/seasons';
 import { ToastViewport } from '@/components/Toast';
 import { useToasts } from '@/components/useToasts';
+import { useMotionAllowed } from '@/components/lab/motion';
 import { Badge, Button, Modal, SectionHeading, Switch } from '@/components/ui';
 
 const pages = [
@@ -93,6 +94,9 @@ function App() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [query, setQuery] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
+  const customizerRef = useRef<HTMLElement>(null);
+  const customizerTitleRef = useRef<HTMLHeadingElement>(null);
+  const customizerMotion = useMotionAllowed(customizerRef);
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
@@ -194,6 +198,22 @@ function App() {
     setMobileMenu(false);
     setQuery('');
   };
+  // Personnalisation : le panneau « À votre image » est à droite en bureau, mais tout en bas de
+  // la page sous 1000 px. On n'y fait défiler que s'il n'est pas déjà en vue, puis on y place le
+  // focus (sans second défilement) pour le clavier et les lecteurs d'écran.
+  const openCustomizer = () => {
+    navigate('Fondations');
+    requestAnimationFrame(() => {
+      const panel = customizerRef.current;
+      if (!panel) return;
+      const { top } = panel.getBoundingClientRect();
+      if (top < 0 || top > window.innerHeight * 0.6) {
+        panel.scrollIntoView({ behavior: customizerMotion ? 'smooth' : 'instant', block: 'start' });
+      }
+      customizerTitleRef.current?.focus({ preventScroll: true });
+    });
+    notify('Le panneau « À votre image » ajuste le thème en temps réel.', 'info');
+  };
   const style = formaStyle({ accent: accent.color, dark, radius, motion, density });
   return (
     <div
@@ -251,13 +271,7 @@ function App() {
           <span>Documentation</span>
           <ExternalLink size={13} />
         </button>
-        <button
-          className="nav-item"
-          onClick={() => {
-            navigate('Fondations');
-            notify('Ajustez votre thème dans le panneau de personnalisation.');
-          }}
-        >
+        <button className="nav-item" onClick={openCustomizer}>
           <Settings2 size={18} />
           <span>Personnalisation</span>
         </button>
@@ -570,15 +584,17 @@ function App() {
             <footer className="content-footer">
               <span>Conçu avec intention. Construit pour durer.</span>
               <span>
-                forma. <span className="footer-dot">/</span> Design system v1.0
+                forma. <span className="footer-dot">/</span> Design system v{__FORMA_VERSION__}
               </span>
             </footer>
           </main>
-          <aside className="customizer">
+          <aside className="customizer" ref={customizerRef}>
             <div className="customizer-heading">
               <div>
                 <SlidersHorizontal size={17} />
-                <h2>À votre image</h2>
+                <h2 ref={customizerTitleRef} tabIndex={-1}>
+                  À votre image
+                </h2>
               </div>
               <button
                 className="icon-button"
