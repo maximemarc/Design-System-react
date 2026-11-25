@@ -1,10 +1,10 @@
 ---
 # =============================================================================
-#  Image de la vitrine -> ghcr.io/maximemarc/design-system-react (paquet privé)
+#  Image de la vitrine -> ghcr.io/maximemarc/design-system (paquet privé)
 #
 #  Publiée à chaque étiquette `vX.Y.Z` poussée sur le dépôt :
-#    ghcr.io/maximemarc/design-system-react:X.Y.Z         (le tag utilisé par les manifests)
-#    ghcr.io/maximemarc/design-system-react:sha-<commit>  (traçabilité / retour arrière)
+#    ghcr.io/maximemarc/design-system:X.Y.Z         (le tag utilisé par les manifests)
+#    ghcr.io/maximemarc/design-system:sha-<commit>  (traçabilité / retour arrière)
 #
 #  Un tag publié n'est JAMAIS réécrit. Les nœuds gardent l'image qu'ils ont déjà
 #  tirée (imagePullPolicy IfNotPresent) : un tag réécrit n'arriverait pas dans le
@@ -32,13 +32,13 @@ concurrency:
 
 jobs:
   build:
-    name: design-system-react
+    name: design-system
     runs-on: ubuntu-26.04
     permissions:
       contents: read
       packages: write
     env:
-      IMAGE: ghcr.io/maximemarc/design-system-react
+      IMAGE: ghcr.io/maximemarc/design-system
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
@@ -89,9 +89,9 @@ jobs:
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.version=${{ steps.v.outputs.version }}
-          cache-from: type=gha,scope=design-system-react
-          cache-to: type=gha,scope=design-system-react,mode=max
+          cache-from: type=gha,scope=design-system
+          cache-to: type=gha,scope=design-system,mode=max
 
       - name: Résumé
         run: |
-          echo "**design-system-react** : \`${{ steps.v.outputs.version }}\` et \`sha-${{ steps.v.outputs.short }}\` publiés" >> "$GITHUB_STEP_SUMMARY"
+          echo "**design-system** : \`${{ steps.v.outputs.version }}\` et \`sha-${{ steps.v.outputs.short }}\` publiés" >> "$GITHUB_STEP_SUMMARY"

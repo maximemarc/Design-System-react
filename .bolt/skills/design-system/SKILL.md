@@ -1,8 +1,8 @@
 ---
-name: forma-design
-description: Construire des interfaces React modulaires, fluides et personnalisables avec le système forma. Utiliser pour créer, adapter ou améliorer une interface, une galerie de composants ou un nouveau projet reposant sur ces conventions.
+name: design-system
+description: Construire des interfaces React modulaires, fluides et personnalisables avec le système design-system. Utiliser pour créer, adapter ou améliorer une interface, une galerie de composants ou un nouveau projet reposant sur ces conventions.
 ---
-# Forma design
+# design-system
 
 ## Direction
 Conserver une identité sobre et chaleureuse : surfaces neutres, accent sauge ou bleu, espaces généreux et hiérarchie typographique nette. Adapter la personnalité au projet plutôt que reproduire une page identique.

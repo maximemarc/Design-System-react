@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { backgroundIcons, seasons, type BackgroundIcon, type Season } from '@/components/seasons';
 
-const storageKey = 'forma-season-preferences';
+const storageKey = 'design-system-season-preferences';
 type Preferences = { season: Season; motifs: boolean; backgroundIcon: BackgroundIcon };
 const defaults: Preferences = { season: 'original', motifs: true, backgroundIcon: 'auto' };
 

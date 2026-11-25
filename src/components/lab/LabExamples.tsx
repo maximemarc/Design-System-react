@@ -369,7 +369,7 @@ function ProductExample({ notify }: { notify: Notify }) {
               notify(`Merci pour votre note de ${value}/5 (démonstration).`);
             }}
           />
-          <CopyField label="Code de bienvenue" value="FORMA-BIENVENUE" />
+          <CopyField label="Code de bienvenue" value="DESIGN-SYSTEM-BIENVENUE" />
           <div className="lab-row">
             <Button onClick={() => notify('Ajouté au panier de démonstration : aucun paiement demandé.')}>
               <ShoppingBag size={15} />

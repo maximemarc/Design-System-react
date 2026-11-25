@@ -894,7 +894,7 @@ export function AuthTemplate({ notify }: { notify: Notify }) {
           ) : (
             <>
               <div className="tpl-f-auth-title">
-                <h4>{tab === 'signin' ? 'Connexion à forma.' : 'Créer votre compte'}</h4>
+                <h4>{tab === 'signin' ? 'Connexion à design-system.' : 'Créer votre compte'}</h4>
                 <p>
                   {tab === 'signin'
                     ? 'Heureux de vous revoir.'

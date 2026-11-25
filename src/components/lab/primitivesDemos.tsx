@@ -99,7 +99,7 @@ export function RadioGroupDemo({ notify }: { notify: Notify }) {
 const path = [
   { label: 'Accueil', href: '#accueil', icon: <Home size={13} aria-hidden="true" /> },
   { label: 'Projets', href: '#projets' },
-  { label: 'forma.', href: '#forma' },
+  { label: 'design-system.', href: '#design-system' },
   { label: 'Composants', href: '#composants' },
   { label: 'Saisie', href: '#saisie' },
   { label: 'Case à cocher' },
@@ -318,7 +318,7 @@ const initialNotifications: DemoNotification[] = [
     id: 'a',
     tone: 'info',
     title: 'Nouvelle version disponible',
-    description: 'forma. 2.4 apporte les primitives de saisie.',
+    description: 'design-system. 2.4 apporte les primitives de saisie.',
     timestamp: 'il y a 2 min',
     read: false,
   },

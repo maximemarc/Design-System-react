@@ -35,7 +35,7 @@ import {
   showcaseComponentCount,
 } from '@/components/lab/labCatalog';
 import { useSavedThemes } from '@/components/useSavedThemes';
-import { formaStyle } from '@/lib/theme';
+import { designSystemStyle } from '@/lib/theme';
 import {
   activeThemeStorageKey,
   readActiveTheme,
@@ -162,7 +162,7 @@ function App() {
       [
         JSON.stringify(
           {
-            format: 'forma-design-pattern',
+            format: 'design-system-design-pattern',
             version: 1,
             currentTheme: theme,
             savedThemes,
@@ -178,7 +178,7 @@ function App() {
     const url = URL.createObjectURL(file);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'forma-design-pattern.json';
+    link.download = 'design-system-design-pattern.json';
     link.click();
     URL.revokeObjectURL(url);
     notify('Votre thème a été exporté.');
@@ -214,7 +214,7 @@ function App() {
     });
     notify('Le panneau « À votre image » ajuste le thème en temps réel.', 'info');
   };
-  const style = formaStyle({ accent: accent.color, dark, radius, motion, density });
+  const style = designSystemStyle({ accent: accent.color, dark, radius, motion, density });
   return (
     <div
       className={`app ${dark ? 'dark' : ''} ${!motion ? 'no-motion' : ''}`}
@@ -232,7 +232,7 @@ function App() {
         >
           <Component size={29} strokeWidth={1.8} />
           <span>
-            forma<span className="brand-period">.</span>
+            design-system<span className="brand-period">.</span>
           </span>
           <Badge>UI KIT</Badge>
         </a>
@@ -575,7 +575,7 @@ function App() {
               </div>
               <div>
                 <strong>Une base. Mille façons de créer.</strong>
-                <p>Du premier prototype au produit final, forma évolue avec vous.</p>
+                <p>Du premier prototype au produit final, design-system évolue avec vous.</p>
               </div>
               <button onClick={() => setDocs(true)}>
                 Découvrir la philosophie <ArrowRight size={15} />
@@ -584,7 +584,7 @@ function App() {
             <footer className="content-footer">
               <span>Conçu avec intention. Construit pour durer.</span>
               <span>
-                forma. <span className="footer-dot">/</span> Design system v{__FORMA_VERSION__}
+                design-system. <span className="footer-dot">/</span> version {__DESIGN_SYSTEM_VERSION__}
               </span>
             </footer>
           </main>
@@ -741,7 +741,7 @@ function App() {
         </div>
       </div>
       <ToastViewport notifications={notifications} dismiss={dismiss} position={position} />
-      <Modal open={docs} onClose={() => setDocs(false)} title="Bienvenue dans forma.">
+      <Modal open={docs} onClose={() => setDocs(false)} title="Bienvenue dans design-system.">
         <p className="modal-copy">
           Une boîte à outils pensée pour créer des interfaces cohérentes, sans limiter votre créativité.
         </p>

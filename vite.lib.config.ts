@@ -2,10 +2,10 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 /**
- * Construction du paquet @maximemarc/forma (distinct de la vitrine, construite
+ * Construction du paquet @maximemarc/design-system (distinct de la vitrine, construite
  * par vite.config.ts). Sortie dans lib-dist/ :
- *   forma.js   module ES, React et lucide-react restent externes ;
- *   forma.css  toutes les feuilles importées par les modules publiés.
+ *   design-system.js   module ES, React et lucide-react restent externes ;
+ *   design-system.css  toutes les feuilles importées par les modules publiés.
  * Les déclarations de types sont produites ensuite par tsconfig.lib.json.
  */
 export default defineConfig({
@@ -19,8 +19,8 @@ export default defineConfig({
     lib: {
       entry: 'src/lib/index.ts',
       formats: ['es'],
-      fileName: () => 'forma.js',
-      cssFileName: 'forma',
+      fileName: () => 'design-system.js',
+      cssFileName: 'design-system',
     },
     rolldownOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime', 'lucide-react'],

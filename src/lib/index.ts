@@ -1,10 +1,10 @@
 /**
- * @maximemarc/forma — point d'entrée du paquet.
+ * @maximemarc/design-system — point d'entrée du paquet.
  *
  * Usage :
- *   import '@maximemarc/forma/forma.css';
- *   import { Button, Badge, formaStyle } from '@maximemarc/forma';
- *   <div className="forma dark" style={formaStyle({ dark: true })}>…</div>
+ *   import '@maximemarc/design-system/design-system.css';
+ *   import { Button, Badge, designSystemStyle } from '@maximemarc/design-system';
+ *   <div className="design-system dark" style={designSystemStyle({ dark: true })}>…</div>
  *
  * Les modules ci-dessous sont ceux de la vitrine, publiés tels quels : la
  * vitrine reste la démonstration vivante de ce que le paquet contient.
@@ -12,7 +12,7 @@
 import './tokens.css';
 import './core.css';
 
-export { accentContrast, defaultAccent, formaStyle, type FormaStyleOptions } from './theme';
+export { accentContrast, defaultAccent, designSystemStyle, type DesignSystemStyleOptions } from './theme';
 
 export { Badge, Button, Modal, SectionHeading, Switch, type BadgeTone } from '../components/ui';
 

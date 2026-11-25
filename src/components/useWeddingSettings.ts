@@ -2,7 +2,7 @@ import { useCallback, useRef, useState, type Dispatch, type SetStateAction } fro
 
 export type WeddingSettings = { first: string; second: string; date: string };
 export type WeddingReply = { name: string; attending: boolean; guests: number };
-const storageKey = 'forma-wedding-settings';
+const storageKey = 'design-system-wedding-settings';
 // Données de démonstration : prénoms fictifs et date toujours située dans six mois environ.
 function demoDate(): string {
   const date = new Date();

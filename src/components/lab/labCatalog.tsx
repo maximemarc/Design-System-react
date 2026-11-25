@@ -141,7 +141,7 @@ const baseLabCatalog: LabEntry[] = [
     category: 'Saisie',
     description: 'Copie en un clic avec retour visible.',
     Demo: CopyDemo,
-    code: `<CopyField label="Clé" value="forma_demo" />`,
+    code: `<CopyField label="Clé" value="design-system_demo" />`,
   },
   {
     id: 'ring',

@@ -1,4 +1,4 @@
-/* Superpositions et outils de la vitrine forma. — préfixe ov-, jetons uniquement. */
+/* Superpositions et outils de la vitrine design-system. — préfixe ov-, jetons uniquement. */
 
 /* Une carte qui porte une superposition ouverte passe au-dessus de ses voisines. */
 .lab-card:has(.ov-open) {

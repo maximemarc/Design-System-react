@@ -202,7 +202,7 @@ export function ColorDemo() {
   );
 }
 export function StrengthDemo() {
-  const [password, setPassword] = useState('Forma');
+  const [password, setPassword] = useState('Design system');
   return (
     <div className="lab-stack">
       <label className="field-label" htmlFor="lab-password">
@@ -222,7 +222,7 @@ export function StrengthDemo() {
   );
 }
 export function CopyDemo() {
-  return <CopyField label="Clé publique de démonstration" value="forma_demo_7Hq2-KX9w" />;
+  return <CopyField label="Clé publique de démonstration" value="design-system_demo_7Hq2-KX9w" />;
 }
 export function RingDemo() {
   const [value, setValue] = useState(68);
@@ -287,7 +287,7 @@ export function SpotlightDemo() {
   );
 }
 export function CarouselDemo() {
-  return <Carousel label="Étapes forma" slides={sampleSlides} />;
+  return <Carousel label="Étapes design-system" slides={sampleSlides} />;
 }
 export function CompareDemo() {
   return (
@@ -302,7 +302,7 @@ export function CompareDemo() {
       after={
         <div className="lab-compare-sample after">
           <strong>Après</strong>
-          <span>Thème forma appliqué</span>
+          <span>Thème design-system appliqué</span>
         </div>
       }
     />

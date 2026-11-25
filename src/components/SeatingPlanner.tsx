@@ -79,7 +79,7 @@ export default function SeatingPlanner({ couple, notify }: { couple: string; not
     setSelected(null);
   };
   const startDrag = (event: DragEvent, guestId: string) => {
-    event.dataTransfer.setData('application/x-forma-guest', guestId);
+    event.dataTransfer.setData('application/x-design-system-guest', guestId);
     event.dataTransfer.effectAllowed = 'move';
     setDragged(guestId);
     setSelected(guestId);
@@ -87,7 +87,7 @@ export default function SeatingPlanner({ couple, notify }: { couple: string; not
   const dropGuest = (event: DragEvent, tableId: string, seat?: number) => {
     event.preventDefault();
     event.stopPropagation();
-    const id = event.dataTransfer.getData('application/x-forma-guest');
+    const id = event.dataTransfer.getData('application/x-design-system-guest');
     if (guests.some(guest => guest.id === id)) assign(id, tableId, seat);
     setDragged(null);
     setOver(null);
