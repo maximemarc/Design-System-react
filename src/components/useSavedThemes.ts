@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { isThemeConfiguration, type SavedTheme } from '@/components/themeConfiguration';
 
-const storageKey = 'forma-saved-themes';
+const storageKey = 'design-system-saved-themes';
 export function useSavedThemes() {
   const [savedThemes, setSavedThemes] = useState<SavedTheme[]>(() => {
     try {

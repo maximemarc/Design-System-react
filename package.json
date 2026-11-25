@@ -1,11 +1,11 @@
 {
-  "name": "@maximemarc/forma",
-  "version": "1.4.1",
-  "description": "forma. — système de design React : jetons de thème clair et sombre, composants de base, tableau de bord.",
+  "name": "@maximemarc/design-system",
+  "version": "2.0.0",
+  "description": "design-system. — système de design React : jetons de thème clair et sombre, composants de base, tableau de bord.",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maximemarc/Design-System-react.git"
+    "url": "git+https://github.com/maximemarc/design-system.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -13,14 +13,14 @@
   "files": [
     "lib-dist"
   ],
-  "module": "./lib-dist/forma.js",
+  "module": "./lib-dist/design-system.js",
   "types": "./lib-dist/types/lib/index.d.ts",
   "exports": {
     ".": {
       "types": "./lib-dist/types/lib/index.d.ts",
-      "import": "./lib-dist/forma.js"
+      "import": "./lib-dist/design-system.js"
     },
-    "./forma.css": "./lib-dist/forma.css",
+    "./design-system.css": "./lib-dist/design-system.css",
     "./package.json": "./package.json"
   },
   "scripts": {

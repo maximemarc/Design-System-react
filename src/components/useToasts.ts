@@ -7,7 +7,7 @@ export type ToastTone = 'success' | 'info' | 'warning' | 'error';
 export type Notify = (message: string, tone?: ToastTone) => void;
 export type Notification = { id: string; message: string; tone: ToastTone };
 
-const positionStorageKey = 'forma-toast-position';
+const positionStorageKey = 'design-system-toast-position';
 const positions: ToastPosition[] = [
   'top-left',
   'top-center',

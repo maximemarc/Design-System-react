@@ -1,6 +1,6 @@
 import { type CSSProperties } from 'react';
 
-/** Accent par défaut de forma. : la sauge. */
+/** Accent par défaut de design-system. : la sauge. */
 export const defaultAccent = '#477b60';
 
 /**
@@ -20,7 +20,7 @@ export function accentContrast(color: string) {
   };
 }
 
-export type FormaStyleOptions = {
+export type DesignSystemStyleOptions = {
   /** Couleur d'accent, en #rrggbb. */
   accent?: string;
   dark?: boolean;
@@ -32,16 +32,16 @@ export type FormaStyleOptions = {
 };
 
 /**
- * Variables CSS d'un thème, à poser en style sur la racine `.forma` :
- * `<div className={`forma ${dark ? 'dark' : ''}`} style={formaStyle({ dark })}>`.
+ * Variables CSS d'un thème, à poser en style sur la racine `.design-system` :
+ * `<div className={`design-system ${dark ? 'dark' : ''}`} style={designSystemStyle({ dark })}>`.
  */
-export function formaStyle({
+export function designSystemStyle({
   accent = defaultAccent,
   dark = false,
   radius = 12,
   motion = true,
   density = 'Confort',
-}: FormaStyleOptions = {}): CSSProperties {
+}: DesignSystemStyleOptions = {}): CSSProperties {
   const contrast = accentContrast(accent);
   return {
     '--accent': accent,

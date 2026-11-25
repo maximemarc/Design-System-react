@@ -44,14 +44,14 @@ export default function WeddingInvitation({
       [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
-        'PRODID:-//forma//Wedding showcase//FR',
+        'PRODID:-//design-system//Wedding showcase//FR',
         'BEGIN:VEVENT',
-        'UID:forma-wedding-demo-20270626',
+        'UID:design-system-wedding-demo-20270626',
         `DTSTAMP:${stamp}`,
         `DTSTART:${formatCalendarDate(eventDate)}`,
         `DTEND:${formatCalendarDate(new Date(eventDate.getTime() + 9 * 3600000))}`,
         `SUMMARY:Mariage de ${escaped}`,
-        'DESCRIPTION:Événement de démonstration forma. Horaires en heure locale.',
+        'DESCRIPTION:Événement de démonstration design-system. Horaires en heure locale.',
         'END:VEVENT',
         'END:VCALENDAR',
       ].join('\r\n') + '\r\n';

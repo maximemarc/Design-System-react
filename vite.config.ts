@@ -12,7 +12,7 @@ const { version } = JSON.parse(readFileSync(new URL('./package.json', import.met
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   // Version affichée dans le pied de page de la vitrine, lue dans package.json au build.
-  define: { __FORMA_VERSION__: JSON.stringify(version) },
+  define: { __DESIGN_SYSTEM_VERSION__: JSON.stringify(version) },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

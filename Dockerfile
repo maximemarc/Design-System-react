@@ -1,4 +1,4 @@
-# Vitrine forma. : fichiers statiques construits par Vite, servis par nginx sur 8080, sans root.
+# Vitrine design-system. : fichiers statiques construits par Vite, servis par nginx sur 8080, sans root.
 # Image publiée par .github/workflows/image.yml (étiquette vX.Y.Z) et déployée sur le cluster
 # (dépôt infra-cluster, apps/design-system/). Le pod tourne en lecture seule : nginx n'écrit
 # que dans /var/cache/nginx, /run et /tmp, montés en emptyDir par le Deployment.

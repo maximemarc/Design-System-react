@@ -1,5 +1,5 @@
 /*
- * Composants de tableau de bord pour Forma.
+ * Composants de tableau de bord pour design-system.
  * Ils ne lisent que les jetons du thème (--surface, --accent, --radius,
  * --motion-duration, et les jetons d'état ajoutés dans index.css).
  */

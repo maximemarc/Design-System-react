@@ -1,4 +1,4 @@
-/* Effets visuels et arrière-plans de la vitrine forma. — préfixe bg-fx-.
+/* Effets visuels et arrière-plans de la vitrine design-system. — préfixe bg-fx-.
    Toutes les couleurs dérivent de --accent et des jetons du thème (clair ou sombre). */
 
 @property --bg-fx-beam-angle {

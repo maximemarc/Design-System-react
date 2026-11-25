@@ -84,7 +84,7 @@ const modifiedAt: Record<string, string> = {
 
 const jsonFiles: Record<string, string> = {
   package: `{
-  "name": "forma-demo",
+  "name": "design-system-demo",
   "private": true,
   "type": "module",
   "scripts": {

@@ -12,7 +12,7 @@ import { ArrowLeft, ArrowRight, CornerDownLeft, GripVertical, Search } from 'luc
 export type KanbanColumn = { id: string; title: string };
 export type KanbanCard = { id: string; title: string; columnId: string; tag?: string };
 
-const cardMime = 'application/x-forma-card';
+const cardMime = 'application/x-design-system-card';
 
 export function KanbanBoard({
   columns,

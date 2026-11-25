@@ -1,7 +1,7 @@
 /* ==========================================================================
-   forma. — composants de base : bouton, bouton icône, surtitre, en-tête de
+   design-system. — composants de base : bouton, bouton icône, surtitre, en-tête de
    section, badge, champ, interrupteur, contrôle segmenté, modale.
-   Classes partagées par la vitrine et par le paquet @maximemarc/forma.
+   Classes partagées par la vitrine et par le paquet @maximemarc/design-system.
    ========================================================================== */
 
 .icon-button {

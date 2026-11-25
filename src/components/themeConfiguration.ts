@@ -14,7 +14,7 @@ export type ThemeConfiguration = {
   toastPosition: ToastPosition;
 };
 export type SavedTheme = { id: string; name: string; configuration: ThemeConfiguration };
-export const activeThemeStorageKey = 'forma-active-theme';
+export const activeThemeStorageKey = 'design-system-active-theme';
 export function readActiveTheme(): ThemeConfiguration | null {
   try {
     const value: unknown = JSON.parse(localStorage.getItem(activeThemeStorageKey) ?? 'null');

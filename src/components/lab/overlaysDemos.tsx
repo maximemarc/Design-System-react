@@ -206,9 +206,9 @@ export function AlertDialogDemo({ notify }: { notify: Notify }) {
       <AlertDialog
         open={open}
         onClose={() => setOpen(false)}
-        title="Supprimer « forma-demo » ?"
+        title="Supprimer « design-system-demo » ?"
         description="Le projet, ses thèmes et son historique seront effacés définitivement. Cette action est irréversible."
-        confirmText="forma-demo"
+        confirmText="design-system-demo"
         confirmLabel="Supprimer le projet"
         onConfirm={async () => {
           await new Promise(resolve => window.setTimeout(resolve, 700));
@@ -294,7 +294,7 @@ export function useTheme(fallback: Theme = 'clair') {
     code: `# Construit puis publie la vitrine
 npm ci && npm run build
 export TAG="v$(date +%Y%m%d)"
-docker build -t forma:$TAG . --push`,
+docker build -t design-system:$TAG . --push`,
   },
 };
 
@@ -322,7 +322,7 @@ export function CodeBlockDemo() {
 }
 
 const session: TerminalLine[] = [
-  { kind: 'command', text: 'npm create forma@latest mon-theme' },
+  { kind: 'command', text: 'npm create design-system@latest mon-theme' },
   { kind: 'info', text: 'Création du projet dans ./mon-theme…' },
   { kind: 'success', text: '42 jetons générés' },
   { kind: 'command', text: 'npm run build' },

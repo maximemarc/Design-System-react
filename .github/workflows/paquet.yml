@@ -1,6 +1,6 @@
 ---
 # =============================================================================
-#  Paquet npm -> @maximemarc/forma sur GitHub Packages (npm.pkg.github.com)
+#  Paquet npm -> @maximemarc/design-system sur GitHub Packages (npm.pkg.github.com)
 #
 #  Publié à chaque étiquette `vX.Y.Z`, comme l'image de la vitrine (image.yml) :
 #  la version du paquet doit être celle de l'étiquette (package.json), sinon le
@@ -29,7 +29,7 @@ concurrency:
 
 jobs:
   publish:
-    name: '@maximemarc/forma'
+    name: '@maximemarc/design-system'
     runs-on: ubuntu-26.04
     permissions:
       contents: read
@@ -59,11 +59,11 @@ jobs:
           VERSION: ${{ steps.v.outputs.version }}
         run: |
           set -euo pipefail
-          if npm view "@maximemarc/forma@$VERSION" version >/dev/null 2>&1; then
-            echo "::error::@maximemarc/forma@$VERSION est déjà publié : pousser une nouvelle étiquette"
+          if npm view "@maximemarc/design-system@$VERSION" version >/dev/null 2>&1; then
+            echo "::error::@maximemarc/design-system@$VERSION est déjà publié : pousser une nouvelle étiquette"
             exit 1
           fi
-          echo "@maximemarc/forma@$VERSION absent du registre : publication."
+          echo "@maximemarc/design-system@$VERSION absent du registre : publication."
 
       - run: npm ci --no-audit --no-fund
 
@@ -77,4 +77,4 @@ jobs:
 
       - name: Résumé
         run: |
-          echo "**@maximemarc/forma** \`${{ steps.v.outputs.version }}\` publié sur GitHub Packages" >> "$GITHUB_STEP_SUMMARY"
+          echo "**@maximemarc/design-system** \`${{ steps.v.outputs.version }}\` publié sur GitHub Packages" >> "$GITHUB_STEP_SUMMARY"

@@ -1,10 +1,10 @@
 /* ==========================================================================
-   forma. — jetons de thème
+   design-system. — jetons de thème
 
-   Les couleurs vivent sur la racine `.forma` (ou `.app`, la racine de la
+   Les couleurs vivent sur la racine `.design-system` (ou `.app`, la racine de la
    vitrine) : clair par défaut, sombre avec la classe `dark`. Les réglages que
    l'utilisateur peut changer (accent, rayon, mouvement, densité) ont une
-   valeur par défaut ici ; `formaStyle()` (src/lib/theme.ts) les recalcule et
+   valeur par défaut ici ; `designSystemStyle()` (src/lib/theme.ts) les recalcule et
    les pose en style en ligne, qui l'emporte.
 
    Polices : DM Sans (texte) et Manrope (titres). Le paquet ne les télécharge
@@ -12,7 +12,7 @@
    auto-héberger (@fontsource-variable/dm-sans et /manrope).
    ========================================================================== */
 
-.forma {
+.design-system {
   --accent: #477b60;
   --on-accent: #ffffff;
   --radius: 12px;
@@ -22,19 +22,19 @@
   --font-title: 'Manrope Variable', 'Manrope', 'DM Sans', system-ui, sans-serif;
   font-family: var(--font-text);
 }
-.forma :where(h1, h2, h3) {
+.design-system :where(h1, h2, h3) {
   font-family: var(--font-title);
 }
-.forma :where(button, input, select, textarea) {
+.design-system :where(button, input, select, textarea) {
   font: inherit;
 }
-.forma :where(button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible) {
+.design-system :where(button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible) {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
 
 .app,
-.forma {
+.design-system {
   --bg: #fafbf9;
   --surface: #fff;
   --muted-surface: #f5f6f3;
@@ -59,7 +59,7 @@
   color: var(--text);
 }
 .app.dark,
-.forma.dark {
+.design-system.dark {
   --bg: #171c19;
   --surface: #1d2420;
   --muted-surface: #252e28;
