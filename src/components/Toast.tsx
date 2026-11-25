@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { type Notification, type ToastPosition } from './useToasts';
-import { AlertTriangle, CheckCircle2, CircleAlert, X } from 'lucide-react';
+import { AlertTriangle, CheckCircle2, CircleAlert, Info, X } from 'lucide-react';
 import './toast.css';
 
-const labels = { success: 'Succès', warning: 'Attention', error: 'Erreur' };
-const icons = { success: CheckCircle2, warning: AlertTriangle, error: CircleAlert };
+const labels = { success: 'Succès', info: 'Info', warning: 'Attention', error: 'Erreur' };
+const icons = { success: CheckCircle2, info: Info, warning: AlertTriangle, error: CircleAlert };
 
 function ToastItem({ notification, dismiss }: { notification: Notification; dismiss: (id: string) => void }) {
   const [hovered, setHovered] = useState(false);
