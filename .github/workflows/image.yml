@@ -49,6 +49,12 @@ jobs:
           v="${GITHUB_REF_NAME#v}"
           [[ "$v" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]] \
             || { echo "::error::étiquette inattendue : '$GITHUB_REF_NAME' (vX.Y.Z attendu)"; exit 1; }
+          # Même garde que le workflow Paquet : une étiquette posée sur un commit dont package.json
+          # porte une autre version publierait l'ancien code sous la nouvelle version (cas de la
+          # v1.4.0, posée avant la fusion de la PR #40 le 2026-11-25).
+          p="$(node -p "require('./package.json').version")"
+          [[ "$v" == "$p" ]] \
+            || { echo "::error::étiquette $GITHUB_REF_NAME mais package.json en $p : aligner la version avant d'étiqueter"; exit 1; }
           echo "version=$v" >> "$GITHUB_OUTPUT"
           echo "short=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
 
